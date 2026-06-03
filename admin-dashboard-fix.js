@@ -534,7 +534,7 @@
 (function(){
   "use strict";
   const API_HOST = location.hostname && location.hostname !== "localhost" ? location.hostname : "127.0.0.1";
-  const API_BASE = "http://" + API_HOST + ":8000/api/v1";
+  const API_BASE = window.CROP_COLLECTOR_API_BASE || ("http://" + API_HOST + ":8000/api/v1");
 
   function showMessage(text){
     let box = document.getElementById("shapefile-export-status-v640");

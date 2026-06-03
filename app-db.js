@@ -1,5 +1,5 @@
 ﻿const API_HOST=window.location.hostname&&window.location.hostname!=='localhost'&&window.location.hostname!=='127.0.0.1'?window.location.hostname:'127.0.0.1';
-const API_URL=`http://${API_HOST}:8000/api/v1`;
+const API_URL=window.CROP_COLLECTOR_API_BASE||`http://${API_HOST}:8000/api/v1`;
 const ACCESS_TOKEN_KEY='access_token';
 const LOCAL_QUEUE_KEY='local_field_entries_queue';
 const SYNC_HISTORY_KEY='sync_event_history';
@@ -454,7 +454,6 @@ CollectorApp.registerModule('db',{
   registerAppServiceWorker,
   enforceProvisionedAccessUI
 });
-
 
 
 
