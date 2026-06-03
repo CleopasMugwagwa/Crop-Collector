@@ -1,0 +1,20 @@
+{
+  "id": "/WELCOME.html?screen=login&v=1060",
+  "name": "Crop Collector",
+  "short_name": "Crop Collector",
+  "description": "Mobile-first agricultural crop and livestock field data collection with offline storage, polygon mapping, geofencing and sync.",
+  "start_url": "WELCOME.html?screen=login&v=1060",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f6faf6",
+  "theme_color": "#1f7a3a",
+  "categories": ["productivity", "utilities", "navigation"],
+  "icons": [
+    { "src": "favicon.svg?v=1060", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Open Collector", "short_name": "Collect", "url": "WELCOME.html?screen=login&v=1060" },
+    { "name": "Admin Dashboard", "short_name": "Admin", "url": "admin-dashboard.html?v=1060" }
+  ]
+}

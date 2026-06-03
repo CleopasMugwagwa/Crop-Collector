@@ -1,0 +1,174 @@
+
+/* ============================================================
+   Crop Collector Admin Dashboard Layout Hotfix
+   Fixes narrow/vertical table text, oversized buttons, and
+   horizontal overflow on Records and Surveys pages.
+   Save as: admin-dashboard-hotfix.css
+   Link after your main admin/dashboard CSS file.
+   ============================================================ */
+
+.admin-main,
+.dashboard-main,
+#admin-main,
+#dashboard-main,
+.content,
+.main-content {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.table-wrap,
+.table-wrapper,
+.records-table-wrap,
+.surveys-table-wrap,
+#records-table-wrapper,
+#surveys-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table,
+.admin-table,
+.records-table,
+.surveys-table,
+#records-table,
+#surveys-table {
+  width: max-content;
+  min-width: 1200px;
+  border-collapse: collapse;
+  table-layout: auto !important;
+}
+
+table th,
+table td,
+.admin-table th,
+.admin-table td,
+.records-table th,
+.records-table td,
+.surveys-table th,
+.surveys-table td {
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  vertical-align: middle;
+  padding: 10px 12px;
+  line-height: 1.35;
+}
+
+td.notes,
+td.description,
+td.review,
+td.observation,
+td.long-text,
+td[data-field="notes"],
+td[data-field="description"],
+td[data-field="review"],
+td[data-field="observation_notes"],
+td[data-field="quality_alert"] {
+  white-space: normal !important;
+  min-width: 220px;
+  max-width: 360px;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+}
+
+.admin-table input,
+.admin-table select,
+.surveys-table input,
+.surveys-table select,
+.records-table input,
+.records-table select {
+  min-width: 150px;
+  max-width: 260px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.admin-table select,
+.surveys-table select,
+.records-table select {
+  min-width: 130px;
+}
+
+.admin-table button,
+.records-table button,
+.surveys-table button,
+button.save-survey,
+button.correct,
+button.review,
+button.history,
+.action-btn,
+.btn {
+  white-space: nowrap !important;
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+  min-width: 90px;
+  width: auto !important;
+  height: auto !important;
+  padding: 9px 14px !important;
+  line-height: 1.2 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 10px;
+}
+
+td.actions,
+td.action,
+td[data-field="actions"],
+td:last-child {
+  min-width: 130px;
+  white-space: nowrap !important;
+}
+
+.dashboard-menu,
+.sidebar,
+#sidebar,
+aside {
+  flex-shrink: 0;
+}
+
+.admin-layout,
+.dashboard-layout,
+#admin-layout,
+#dashboard-layout {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.admin-layout > main,
+.dashboard-layout > main,
+#admin-layout > main,
+#dashboard-layout > main {
+  min-width: 0;
+  flex: 1;
+  overflow-x: auto;
+}
+
+@media (max-width: 1100px) {
+  .admin-layout,
+  .dashboard-layout,
+  #admin-layout,
+  #dashboard-layout {
+    display: block;
+  }
+
+  .dashboard-menu,
+  .sidebar,
+  #sidebar,
+  aside {
+    margin-bottom: 16px;
+  }
+
+  table,
+  .admin-table,
+  .records-table,
+  .surveys-table,
+  #records-table,
+  #surveys-table {
+    min-width: 1200px;
+  }
+}

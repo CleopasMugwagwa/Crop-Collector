@@ -1,0 +1,91 @@
+
+/* OFFLINE-FIRST SYNC WORKFLOW v540 */
+.offline-sync-panel{
+  margin:.85rem 0;
+  border:1px solid #d9ead9;
+  border-radius:18px;
+  background:#ffffff;
+  box-shadow:0 10px 26px rgba(20,83,45,.10);
+  overflow:hidden;
+}
+
+.offline-sync-panel summary{
+  cursor:pointer;
+  padding:1rem;
+  color:#14532d;
+  font-weight:900;
+  background:#fbfefb;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.offline-sync-panel .sync-body{
+  padding:1rem;
+}
+
+.sync-status-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:.65rem;
+  margin-bottom:.8rem;
+}
+
+.sync-status-card{
+  border:1px solid #d9ead9;
+  border-radius:14px;
+  background:#f8fcf8;
+  padding:.75rem;
+}
+
+.sync-status-card strong{
+  display:block;
+  color:#064e24;
+  font-size:1.35rem;
+  line-height:1.1;
+}
+
+.sync-status-card span{
+  display:block;
+  color:#657565;
+  font-size:.78rem;
+  font-weight:800;
+  text-transform:uppercase;
+  margin-top:.25rem;
+}
+
+.sync-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.65rem;
+}
+
+.sync-actions button{
+  min-height:2.75rem;
+  border-radius:13px;
+  border:0;
+  background:#1f7a3a;
+  color:#fff;
+  font-weight:850;
+  cursor:pointer;
+}
+
+.sync-actions button.secondary{
+  background:#edf7ee;
+  color:#14532d;
+  border:1px solid #d9ead9;
+}
+
+#offline-sync-message{
+  margin-top:.75rem;
+  padding:.7rem;
+  border-radius:12px;
+  background:#edf7ee;
+  color:#14532d;
+  font-size:.9rem;
+  line-height:1.35;
+}
+
+@media(max-width:540px){
+  .sync-actions{grid-template-columns:1fr;}
+}

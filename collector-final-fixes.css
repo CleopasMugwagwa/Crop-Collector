@@ -1,0 +1,784 @@
+﻿/* Crop Collector v1028 final visibility and mobile polish. */
+#collector-quick-menu,
+.quick-menu-note {
+  display: none !important;
+}
+
+#collect-form,
+#crop-form,
+#collector-primary-modules {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+#collector-primary-modules.collector-start-card,
+#collector-primary-modules {
+  display: block !important;
+  margin: 0 0 1rem !important;
+  padding: 1rem !important;
+  border: 1px solid #cfe3cf !important;
+  border-radius: 16px !important;
+  background: #fff !important;
+}
+
+.collector-start-help {
+  margin: 0 0 .75rem;
+  color: #5f6f5f;
+  line-height: 1.45;
+}
+
+#collector-survey-menu-group,
+#collector-survey-name {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+#collector-survey-name {
+  width: 100% !important;
+  min-height: 3rem !important;
+  border: 1px solid #cfe3cf !important;
+  border-radius: 14px !important;
+  background: #fff !important;
+}
+
+#collector-primary-module-switch {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: .75rem !important;
+  margin-top: .75rem !important;
+}
+
+#collector-open-crop,
+#collector-open-livestock {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 3.45rem !important;
+  border-radius: 16px !important;
+  font-weight: 900 !important;
+}
+
+#collector-open-crop {
+  background: #1f7a3a !important;
+  color: #fff !important;
+}
+
+#collector-open-livestock {
+  background: #607d8b !important;
+  color: #fff !important;
+}
+
+#collector-open-crop .save-flow-chip,
+#collector-open-livestock .save-flow-chip {
+  display: none !important;
+}
+
+#collector-module-active-label {
+  display: block !important;
+  margin-top: .75rem !important;
+  background: #eef6ef !important;
+  color: #14532d !important;
+  font-weight: 800 !important;
+}
+
+#collector-odk-nav {
+  display: flex !important;
+  gap: .7rem !important;
+  margin-top: .8rem !important;
+}
+
+#collector-odk-nav button {
+  min-height: 3.1rem !important;
+  border-radius: 14px !important;
+  font-weight: 900 !important;
+  flex: 1 !important;
+}
+
+#collector-odk-step-label {
+  display: block !important;
+  margin-top: .7rem !important;
+  color: #5f6f5f !important;
+  line-height: 1.45 !important;
+}
+
+body.odk-layout #crop-form > .input-group,
+body.odk-layout #crop-form > #ministry-admin-fields,
+body.odk-layout #crop-form > #ministry-summary-fields,
+body.odk-layout #crop-form > #ministry-plot-fields,
+body.odk-layout #crop-form > #crop-plan-selector,
+body.odk-layout #crop-form > #collect-production-drawer,
+body.odk-layout #crop-form > #collect-observation-drawer,
+body.odk-layout #crop-form > #ministry-full-questionnaire {
+  display: none !important;
+}
+
+body.odk-layout #crop-form .questionnaire-group:not(.odk-section-active),
+body.odk-layout #crop-form .input-group:not(.odk-question-active) {
+  display: none !important;
+}
+
+body.odk-layout #crop-form .questionnaire-group.odk-section-active,
+body.odk-layout #crop-form .input-group.odk-question-active {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+body.odk-layout #crop-form .questionnaire-group.odk-section-active > .questionnaire-group-header,
+body.odk-layout #crop-form .questionnaire-group.odk-section-active .questionnaire-group-meta,
+body.odk-layout #crop-form .questionnaire-group.odk-section-active .questionnaire-group-badge,
+body.odk-layout #crop-form .questionnaire-group.odk-section-active .questionnaire-group-title,
+body.odk-layout #crop-form .questionnaire-group.odk-section-active .questionnaire-group-note {
+  display: none !important;
+}
+
+body.odk-layout #crop-form .questionnaire-group.odk-section-active > .questionnaire-group-body {
+  display: block !important;
+  padding: 0 !important;
+}
+
+body.odk-layout #crop-form .input-group.odk-question-active {
+  border: 1px solid #cfe3cf !important;
+  border-radius: 16px !important;
+  background: #fff !important;
+  padding: .75rem !important;
+  margin-bottom: .85rem !important;
+}
+
+body.odk-layout #crop-form .input-group.odk-question-active label {
+  position: static !important;
+  display: block !important;
+  margin: 0 0 .35rem !important;
+  color: #14532d !important;
+  font-size: .86rem !important;
+  font-weight: 800 !important;
+}
+
+body.odk-layout #crop-form .input-group.odk-question-active input:not([type="hidden"]),
+body.odk-layout #crop-form .input-group.odk-question-active select,
+body.odk-layout #crop-form .input-group.odk-question-active textarea {
+  display: block !important;
+  width: 100% !important;
+  min-height: 3rem !important;
+  border: 1px solid #cfe3cf !important;
+  border-radius: 14px !important;
+  background: #fff !important;
+}
+
+body[data-collector-primary-module="choose"] #save-action-stack,
+body[data-collector-primary-module="choose"] #save-flow-card,
+body[data-collector-primary-module="choose"] #save-entry-btn,
+body[data-collector-primary-module="choose"] #save-next-plot-btn,
+body[data-collector-primary-module="choose"] #select-polygon-btn {
+  display: none !important;
+}
+
+body.collector-module-livestock #collector-draw-section,
+body.collector-module-livestock #crop-type,
+body.collector-module-livestock #growth-stage,
+body.collector-module-livestock #crop-condition,
+body.collector-module-livestock #irrigation-type,
+body.collector-module-livestock #planting-date,
+body.collector-module-livestock #harvest-date,
+body.collector-module-livestock #yield-expected,
+body.collector-module-livestock #yield-tonnes {
+  display: none !important;
+}
+
+@media (max-width: 899px) {
+  #main {
+    display: block !important;
+    min-height: 100vh !important;
+    overflow: visible !important;
+  }
+
+  #map-container,
+  #sidebar {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  #sidebar {
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  #collector-odk-nav,
+  #save-action-stack {
+    position: sticky !important;
+    bottom: 0 !important;
+    z-index: 20 !important;
+    background: #fff !important;
+    padding-top: .5rem !important;
+  }
+
+  button,
+  select,
+  input,
+  textarea {
+    min-height: 44px;
+    font-size: 16px;
+  }
+}
+
+/* v1038: clean single-question collector display */
+body.collector-clean-question-mode #collector-module-active-label,
+body.collector-clean-question-mode #collector-feedback,
+body.collector-clean-question-mode #save-action-stack:not([data-final-visible="true"]),
+body.collector-clean-question-mode #save-flow-card:not([data-final-visible="true"]),
+body.collector-clean-question-mode .collect-step-toggle,
+body.collector-clean-question-mode #collect-step-toggle,
+body.collector-clean-question-mode #collect-basic-guidance,
+body.collector-clean-question-mode #collect-more-guidance,
+body.collector-clean-question-mode #collector-questionnaire-progress {
+  display: none !important;
+}
+
+body.collector-clean-question-mode #crop-form .questionnaire-group,
+body.collector-clean-question-mode #crop-form details.compact-menu {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+body.collector-clean-question-mode #crop-form .questionnaire-group:not(.odk-section-active),
+body.collector-clean-question-mode #crop-form details.compact-menu:not([open]) {
+  display: none !important;
+}
+
+body.collector-clean-question-mode #crop-form .questionnaire-group-header,
+body.collector-clean-question-mode #crop-form .questionnaire-group-meta,
+body.collector-clean-question-mode #crop-form .questionnaire-group-badge,
+body.collector-clean-question-mode #crop-form .questionnaire-group-title,
+body.collector-clean-question-mode #crop-form .questionnaire-group-note,
+body.collector-clean-question-mode #crop-form summary {
+  display: none !important;
+}
+
+body.collector-clean-question-mode #crop-form .questionnaire-group-body {
+  display: block !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+body.collector-clean-question-mode #crop-form .input-group.odk-question-active {
+  display: block !important;
+  margin: 0 0 .8rem !important;
+  padding: .95rem !important;
+  border: 1px solid #c9dfca !important;
+  border-radius: 14px !important;
+  background: #fff !important;
+  box-shadow: 0 1px 2px rgba(20, 83, 45, .05) !important;
+}
+
+body.collector-clean-question-mode #collector-odk-nav {
+  display: flex !important;
+  gap: .75rem !important;
+  margin-top: .75rem !important;
+  padding: .65rem 0 0 !important;
+  background: #fff !important;
+}
+
+body.collector-clean-question-mode #collector-odk-step-label {
+  display: block !important;
+  margin: .65rem 0 0 !important;
+  color: #31513b !important;
+  font-size: .94rem !important;
+}
+
+body.collector-clean-question-mode:not(.collector-final-step) #save-action-stack,
+body.collector-clean-question-mode:not(.collector-final-step) #save-flow-card,
+body.collector-clean-question-mode:not(.collector-final-step) #save-entry-btn,
+body.collector-clean-question-mode:not(.collector-final-step) #save-next-plot-btn {
+  display: none !important;
+}
+
+body.collector-clean-question-mode #collector-open-crop:disabled,
+body.collector-clean-question-mode #collector-open-livestock:disabled {
+  opacity: 1 !important;
+  cursor: pointer !important;
+}
+
+/* v1041: module state must match the visible form */
+body.collector-clean-question-mode #collector-module-active-label,
+body.collector-clean-question-mode #collector-module-active-label[style] {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+body.collector-clean-question-mode #collector-open-crop,
+body.collector-clean-question-mode #collector-open-livestock {
+  background: #78909c !important;
+  color: #fff !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+}
+
+body.collector-clean-question-mode[data-collector-primary-module="crop"] #collector-open-crop,
+body.collector-clean-question-mode[data-collector-primary-module="livestock"] #collector-open-livestock {
+  background: #1f7a3a !important;
+  color: #fff !important;
+  border-color: #8ed09c !important;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.22) !important;
+}
+
+body.collector-clean-question-mode[data-collector-primary-module="crop"] #collector-open-livestock,
+body.collector-clean-question-mode[data-collector-primary-module="livestock"] #collector-open-crop {
+  background: #78909c !important;
+  color: #fff !important;
+}
+
+body.collector-clean-question-mode[data-collector-primary-module="livestock"] #collect-form-heading::after {
+  content: "" !important;
+}
+
+body.collector-clean-question-mode #crop-form {
+  margin-top: .75rem !important;
+}
+
+/* v1050-rc1 Draft Queue polish */
+.draft-queue-summary{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.45rem;margin:.35rem 0 .75rem}
+.draft-queue-chip{border:1px solid #dce8dc;background:#f8fbf8;border-radius:8px;padding:.5rem .45rem;text-align:center;min-width:0}
+.draft-queue-chip strong{display:block;color:#174f25;font-size:1.05rem;line-height:1}
+.draft-queue-chip span{display:block;color:#587258;font-size:.68rem;text-transform:uppercase;font-weight:800;margin-top:.18rem}
+.draft-queue-chip.pending{background:#fff8e1;border-color:#f1d28a}.draft-queue-chip.failed{background:#ffebee;border-color:#efb8b8}.draft-queue-chip.synced{background:#e8f5e9;border-color:#b9dfbd}
+.entry.draft-queue-card{border:1px solid #dce8dc;border-radius:8px;margin-bottom:.55rem;background:#fff;box-shadow:0 2px 10px rgba(21,70,32,.05)}
+.entry.draft-queue-card[data-sync-state="pending"]{border-left:5px solid #f6b73c}.entry.draft-queue-card[data-sync-state="failed"]{border-left:5px solid #d32f2f}.entry.draft-queue-card[data-sync-state="synced"]{border-left:5px solid #2e7d32}
+.entry.draft-queue-card.needs-geofence-review{box-shadow:0 0 0 2px rgba(251,140,0,.16)}
+@media(max-width:520px){.draft-queue-summary{grid-template-columns:repeat(3,minmax(0,1fr))}.draft-queue-chip strong{font-size:.95rem}.draft-queue-chip span{font-size:.62rem}}
+
+/* v1059 collector-only field dashboard */
+.collector-field-dashboard{
+  margin:0 0 .9rem;
+  padding:.85rem;
+  border:1px solid rgba(46,125,50,.18);
+  border-radius:12px;
+  background:linear-gradient(180deg,#fbfffb,#f1f8f1);
+  box-shadow:0 8px 24px rgba(22,101,52,.08);
+}
+.collector-field-dashboard-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.75rem;
+  margin-bottom:.7rem;
+}
+.collector-field-dashboard-head strong{
+  display:block;
+  color:#064e1f;
+  font-size:1rem;
+  line-height:1.2;
+}
+.collector-field-dashboard-head span{
+  display:block;
+  margin-top:.1rem;
+  color:#536b55;
+  font-size:.78rem;
+}
+#collector-dashboard-refresh{
+  width:2.3rem;
+  height:2.3rem;
+  min-width:2.3rem;
+  padding:0;
+  border-radius:8px;
+  background:#e8f3ea;
+  color:#14532d;
+}
+.collector-field-dashboard-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:.55rem;
+}
+.collector-field-card{
+  min-width:0;
+  padding:.65rem .7rem;
+  border:1px solid #dbe9dc;
+  border-left:4px solid #94a3a0;
+  border-radius:10px;
+  background:#fff;
+}
+.collector-field-card span{
+  display:block;
+  color:#536b55;
+  font-size:.68rem;
+  font-weight:800;
+  text-transform:uppercase;
+}
+.collector-field-card strong{
+  display:block;
+  margin:.18rem 0;
+  color:#102a16;
+  font-size:.98rem;
+  line-height:1.2;
+  overflow-wrap:anywhere;
+}
+.collector-field-card small{
+  display:block;
+  color:#5d6f60;
+  font-size:.72rem;
+  line-height:1.25;
+  overflow-wrap:anywhere;
+}
+.collector-field-card[data-state="good"]{border-left-color:#1f7a38;background:#fbfffb}
+.collector-field-card[data-state="warn"]{border-left-color:#d97706;background:#fffaf0}
+.collector-field-card[data-state="bad"]{border-left-color:#dc2626;background:#fff7f7}
+.collector-photo-evidence-hint{
+  margin:-.35rem 0 .75rem;
+  padding:.6rem .7rem;
+  border:1px solid #dbe9dc;
+  border-left:4px solid #94a3a0;
+  border-radius:10px;
+  background:#fff;
+  color:#425946;
+  font-size:.82rem;
+  line-height:1.35;
+}
+.collector-photo-evidence-hint[data-state="good"]{border-left-color:#1f7a38;background:#fbfffb;color:#14532d}
+.collector-photo-evidence-hint[data-state="warn"]{border-left-color:#d97706;background:#fffaf0;color:#744100}
+#collector-draw-guidance{
+  display:grid;
+  gap:.45rem;
+  line-height:1.35;
+}
+#collector-draw-guidance strong{
+  color:#064e1f;
+}
+#collector-draw-guidance span,
+#collector-draw-guidance small{
+  color:#536b55;
+}
+#collector-draw-guidance button{
+  margin-top:.25rem;
+  width:100%;
+}
+@media(max-width:380px){
+  .collector-field-dashboard{padding:.7rem}
+  .collector-field-dashboard-grid{gap:.45rem}
+  .collector-field-card{padding:.58rem .6rem}
+  .collector-field-card strong{font-size:.9rem}
+}
+
+/* v1050 clean mobile display */
+body.collector-clean-display-v1050 #second-plot-helper{display:none!important}
+body.collector-clean-display-v1050 .collector-support-collapsed{padding-bottom:0!important}
+body.collector-clean-display-v1050 .collector-support-collapsed > h2{margin-bottom:0!important}
+body.collector-clean-display-v1050 #offline-sync-panel.collector-sync-compact{margin:.65rem 0 0!important;border-radius:8px!important;box-shadow:none!important}
+body.collector-clean-display-v1050 #offline-sync-panel.collector-sync-compact:not([open]){padding:0!important;background:#fbfefb!important}
+body.collector-clean-display-v1050 #offline-sync-panel.collector-sync-compact:not([open]) summary{margin:0!important;padding:.75rem .85rem!important;min-height:2.6rem!important}
+body.collector-clean-display-v1050 #offline-sync-panel.collector-sync-compact:not([open]) .sync-body{display:none!important}
+
+/* v1051 visual polish: calmer agricultural field UI without changing wizard logic */
+body.collector-clean-display-v1050{
+  --collector-ink:#123f27;
+  --collector-leaf:#1f7a3a;
+  --collector-leaf-dark:#155f2b;
+  --collector-muted:#53695d;
+  --collector-line:#cfe4d0;
+  --collector-soft:#f3f8f1;
+}
+
+body.collector-clean-display-v1050 #sidebar{
+  background:
+    linear-gradient(135deg, rgba(31,122,58,.055) 0 25%, transparent 25% 50%, rgba(31,122,58,.04) 50% 75%, transparent 75%),
+    #edf5eb!important;
+  background-size:18px 18px!important;
+}
+
+body.collector-clean-display-v1050 #sidebar .section{
+  border:1px solid rgba(20,83,45,.12)!important;
+  border-radius:14px!important;
+  box-shadow:0 8px 24px rgba(18,63,39,.06)!important;
+}
+
+body.collector-clean-display-v1050 #collector-primary-modules.collector-start-card,
+body.collector-clean-display-v1050 #collector-primary-modules{
+  position:relative!important;
+  overflow:hidden!important;
+  padding:1rem!important;
+  border-radius:14px!important;
+  border-color:rgba(31,122,58,.22)!important;
+  background:linear-gradient(180deg,#fff 0%,#fbfefb 100%)!important;
+  box-shadow:0 8px 22px rgba(18,63,39,.06)!important;
+}
+
+body.collector-clean-display-v1050 #collector-primary-modules::before{
+  content:"";
+  position:absolute;
+  inset:0 0 auto;
+  height:4px;
+  background:linear-gradient(90deg,#1f7a3a,#8aa36f,#607d8b);
+}
+
+body.collector-clean-display-v1050 #collector-primary-modules .questionnaire-group-title{
+  margin:.15rem 0 .18rem!important;
+  color:var(--collector-ink)!important;
+  font-size:1rem!important;
+  font-weight:850!important;
+}
+
+body.collector-clean-display-v1050 .collector-start-help{
+  margin:0 0 .85rem!important;
+  color:var(--collector-muted)!important;
+  font-size:.9rem!important;
+}
+
+body.collector-clean-display-v1050 #collector-survey-menu-group{
+  margin-bottom:.85rem!important;
+}
+
+
+body.collector-clean-display-v1050 #collector-survey-menu-group label,
+body.collector-clean-display-v1050 label[for="collector-survey-name"]{
+  font-weight:750!important;
+  color:#124f25!important;
+}
+body.collector-clean-display-v1050 #collector-survey-name{
+  min-height:3.1rem!important;
+  border-radius:12px!important;
+  border-color:rgba(31,122,58,.2)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.85)!important;
+}
+
+body.collector-clean-display-v1050 #collector-primary-module-switch{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:.6rem!important;
+}
+
+body.collector-clean-display-v1050 #collector-open-crop,
+body.collector-clean-display-v1050 #collector-open-livestock,
+body.collector-clean-question-mode #collector-open-crop,
+body.collector-clean-question-mode #collector-open-livestock{
+  min-height:4rem!important;
+  justify-content:flex-start!important;
+  gap:.62rem!important;
+  padding:.68rem!important;
+  border-radius:12px!important;
+  border:1px solid rgba(20,83,45,.18)!important;
+  background:#f8fbf8!important;
+  color:var(--collector-ink)!important;
+  text-align:left!important;
+  box-shadow:0 3px 10px rgba(18,63,39,.05)!important;
+}
+
+body.collector-clean-display-v1050 .collector-module-icon{
+  display:grid;
+  place-items:center;
+  flex:0 0 2rem;
+  width:2rem;
+  height:2rem;
+  border-radius:10px;
+  background:#e4f2e6;
+  color:var(--collector-leaf);
+  font-size:1rem;
+  line-height:1;
+}
+
+body.collector-clean-display-v1050 .collector-module-copy{
+  display:grid;
+  min-width:0;
+  gap:.15rem;
+}
+
+body.collector-clean-display-v1050 .collector-module-copy strong{
+  font-size:.92rem;
+  line-height:1.05;
+  font-weight:850;
+}
+
+body.collector-clean-display-v1050 .collector-module-copy small{
+  color:#5f7165;
+  font-size:.68rem;
+  line-height:1.1;
+  font-weight:650;
+}
+
+body.collector-clean-question-mode[data-collector-primary-module="crop"] #collector-open-crop,
+body.collector-clean-question-mode[data-collector-primary-module="livestock"] #collector-open-livestock{
+  background:#e9f6ec!important;
+  color:var(--collector-ink)!important;
+  border-color:#1f7a3a!important;
+  box-shadow:0 0 0 2px rgba(31,122,58,.12),0 8px 16px rgba(18,63,39,.08)!important;
+}
+
+body.collector-clean-question-mode[data-collector-primary-module="crop"] #collector-open-crop .collector-module-icon,
+body.collector-clean-question-mode[data-collector-primary-module="livestock"] #collector-open-livestock .collector-module-icon{
+  background:#1f7a3a;
+  color:#fff;
+}
+
+body.collector-clean-question-mode[data-collector-primary-module="crop"] #collector-open-livestock,
+body.collector-clean-question-mode[data-collector-primary-module="livestock"] #collector-open-crop{
+  background:#f8fbf8!important;
+  color:var(--collector-muted)!important;
+  border-color:rgba(20,83,45,.12)!important;
+}
+
+body.collector-clean-display-v1050 #collector-odk-nav button{
+  border-radius:12px!important;
+  box-shadow:0 4px 12px rgba(18,63,39,.08)!important;
+}
+
+body.collector-clean-display-v1050 #collector-odk-back{
+  background:#edf3ee!important;
+  color:#31513b!important;
+  border:1px solid rgba(49,81,59,.16)!important;
+}
+
+body.collector-clean-display-v1050 #collector-odk-next{
+  background:#237f3d!important;
+  color:#fff!important;
+}
+
+body.collector-clean-display-v1050 #collector-odk-step-label{
+  padding:.45rem .15rem 0!important;
+  color:#355642!important;
+  font-size:.88rem!important;
+}
+
+@media(max-width:420px){
+  body.collector-clean-display-v1050 #collector-primary-module-switch{
+    grid-template-columns:1fr!important;
+  }
+  body.collector-clean-display-v1050 #collector-open-crop,
+  body.collector-clean-display-v1050 #collector-open-livestock{
+    min-height:3.65rem!important;
+  }
+}
+
+@media(max-width:899px){
+  body.collector-clean-display-v1050 .draft-queue-summary{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:.35rem!important;
+    margin:.25rem 0 .5rem!important;
+  }
+  body.collector-clean-display-v1050 .draft-queue-chip{
+    min-height:2.65rem!important;
+    padding:.35rem .4rem!important;
+    border-radius:8px!important;
+  }
+  body.collector-clean-display-v1050 .draft-queue-chip strong{
+    font-size:1rem!important;
+    line-height:1!important;
+  }
+  body.collector-clean-display-v1050 .draft-queue-chip span{
+    font-size:.62rem!important;
+    line-height:1.05!important;
+    white-space:nowrap!important;
+  }
+  body.collector-clean-display-v1050 .draft-queue-chip.synced,
+  body.collector-clean-display-v1050 .draft-queue-chip:nth-child(4),
+  body.collector-clean-display-v1050 .draft-queue-chip:nth-child(5){
+    display:none!important;
+  }
+  body.collector-clean-display-v1050 #fields-list{
+    max-height:220px!important;
+  }
+}
+
+body.collector-clean-display-v1050 #collector-survey-name option[value=""],
+body.collector-clean-display-v1050 #survey-name option[value=""]{
+  font-weight:800!important;
+  color:#0b4f1f!important;
+}
+body.collector-clean-display-v1050 #collector-survey-menu-group{
+  padding-top:.15rem!important;
+}
+
+body.collector-clean-display-v1050 #collector-survey-menu-group label,
+body.collector-clean-display-v1050 label[for="collector-survey-name"]{
+  top:-.72rem!important;
+  font-size:.74rem!important;
+  line-height:1!important;
+  padding:0 .38rem!important;
+}
+
+body.collector-clean-display-v1050 #collector-survey-name{
+  padding-top:1.28rem!important;
+  padding-bottom:.58rem!important;
+  line-height:1.25!important;
+}
+/* v1068: make collection type cards breathe on small screens */
+body.collector-clean-display-v1050 #collector-primary-module-switch{
+  gap:.7rem!important;
+}
+
+body.collector-clean-display-v1050 #collector-open-crop,
+body.collector-clean-display-v1050 #collector-open-livestock,
+body.collector-clean-question-mode #collector-open-crop,
+body.collector-clean-question-mode #collector-open-livestock{
+  align-items:center!important;
+  gap:.55rem!important;
+  min-width:0!important;
+  overflow:hidden!important;
+}
+
+body.collector-clean-display-v1050 .collector-module-icon{
+  flex:0 0 2.2rem!important;
+  width:2.2rem!important;
+  height:2.2rem!important;
+  font-size:0!important;
+}
+
+body.collector-clean-display-v1050 .collector-module-icon::before{
+  content:"";
+  display:block;
+  width:.85rem;
+  height:.85rem;
+  border-radius:3px;
+  border:2px solid currentColor;
+}
+
+body.collector-clean-display-v1050 .collector-module-icon.livestock-icon::before{
+  width:.72rem;
+  height:.72rem;
+  border-radius:50%;
+  background:currentColor;
+}
+
+body.collector-clean-display-v1050 .collector-module-copy strong{
+  font-size:.88rem!important;
+  line-height:1.04!important;
+  overflow-wrap:anywhere!important;
+}
+
+body.collector-clean-display-v1050 .collector-module-copy small{
+  font-size:.66rem!important;
+  line-height:1.06!important;
+  overflow-wrap:anywhere!important;
+}
+
+@media(max-width:560px){
+  body.collector-clean-display-v1050 #collector-primary-module-switch{
+    grid-template-columns:1fr!important;
+  }
+  body.collector-clean-display-v1050 #collector-open-crop,
+  body.collector-clean-display-v1050 #collector-open-livestock{
+    min-height:3.6rem!important;
+  }
+}
+/* v1070: fix spacing after removing Start Field Record helper copy */
+body.collector-clean-display-v1050 #collector-primary-modules .questionnaire-group-title{
+  margin-bottom:1.05rem!important;
+  line-height:1.18!important;
+}
+
+body.collector-clean-display-v1050 #collector-survey-menu-group{
+  margin-top:.15rem!important;
+  margin-bottom:1rem!important;
+}
+
+body.collector-clean-display-v1050 #collector-primary-module-switch{
+  margin-top:.65rem!important;
+}

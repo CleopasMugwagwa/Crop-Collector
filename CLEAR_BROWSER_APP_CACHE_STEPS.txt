@@ -1,0 +1,14 @@
+After copying WELCOME.html:
+1. Open Chrome DevTools.
+2. Go to Application > Storage.
+3. Click Clear site data.
+4. Close all 127.0.0.1:5500 tabs.
+5. Stop Live Server.
+6. Restart Live Server.
+7. Open exactly:
+   http://127.0.0.1:5500/WELCOME.html?screen=collector&v=830
+
+Your screenshot showed the browser was still loading:
+WELCOME.html?screen=collector&v=400
+and JS files v=650.
+That means the old cached/routed file was still being used.

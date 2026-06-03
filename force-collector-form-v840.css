@@ -1,0 +1,18 @@
+
+/* FORCE COLLECTOR FORM v840 */
+#force-survey-buttons-v840{display:grid!important;grid-template-columns:1fr!important;gap:.75rem!important;margin:.85rem 0 1rem!important}
+#force-start-crop-v840,#force-start-livestock-v840{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;min-height:3.6rem!important;border:0!important;border-radius:16px!important;color:#fff!important;font-weight:900!important;font-size:1rem!important;cursor:pointer!important}
+#force-start-crop-v840{background:#1f7a3a!important}
+#force-start-livestock-v840{background:#78909c!important}
+#collect-form,#crop-form{display:block!important;visibility:visible!important;opacity:1!important;height:auto!important;max-height:none!important;overflow:visible!important}
+#crop-form .input-group{display:block!important;visibility:visible!important;opacity:1!important;height:auto!important;max-height:none!important;margin-bottom:.85rem!important}
+#crop-form #location-group,#crop-form .input-group:has(input[type="hidden"]){display:none!important}
+#crop-form input:not([type="hidden"]),#crop-form select,#crop-form textarea{width:100%!important;min-height:2.95rem!important;border:1px solid #cfe3cf!important;border-radius:14px!important;background:#fff!important;color:#1f2d1f!important;font-size:.96rem!important;box-sizing:border-box!important}
+#crop-form label{visibility:visible!important;opacity:1!important;color:#14532d!important}
+#save-entry-btn{width:100%!important;min-height:3.15rem!important;border-radius:14px!important;background:#1f7a3a!important;color:#fff!important;font-weight:900!important;align-items:center!important;justify-content:center!important}
+body:not(.force-module-started-v840) #save-entry-btn,body:not(.force-module-started-v840) #remove-shape-btn,body:not(.force-module-started-v840) #cancel-edit-btn,body:not(.force-module-started-v840) #select-polygon-btn{display:none!important}
+body.force-module-started-v840 #save-entry-btn{display:flex!important}
+#remove-shape-btn,#cancel-edit-btn,#select-polygon-btn{display:none!important}
+#collector-quick-menu,.quick-menu-note,#collector-feedback,.collector-feedback,#save-flow-card,.save-flow-card,#geometry-edit-status,#save-action-stack,.save-action-stack{display:none!important}
+.force-offline-v840:not(.offline-open)>*:not(h2){display:none!important}
+.force-offline-v840>h2{cursor:pointer!important}

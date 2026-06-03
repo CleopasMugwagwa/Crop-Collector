@@ -1,0 +1,179 @@
+
+
+/* ============================================================
+   STABLE SIMPLE COLLECTOR v800
+   Purpose: stop patch conflicts and show the real form.
+   ============================================================ */
+
+#collector-quick-menu,
+.quick-menu-note,
+.quick-menu-description,
+.quick-menu-helper,
+#collector-feedback,
+.collector-feedback,
+#save-flow-card,
+.save-flow-card,
+#geometry-edit-status,
+#save-action-stack,
+.save-action-stack,
+#required-progress,
+#completion-status,
+#next-questions,
+#quality-score,
+#wizard-progress,
+#collector-progress,
+#form-progress,
+.progress-card,
+.form-progress,
+.setup-progress,
+.question-progress,
+.step-progress,
+.quality-card,
+.quality-score-card {
+  display: none !important;
+}
+
+#collect-form,
+#crop-form {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+#collect-form-heading {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin-bottom: .75rem !important;
+}
+
+/* Hide advanced dashboard-like cards from the collector screen */
+#sidebar .section:nth-of-type(2),
+#sidebar .section:nth-of-type(3),
+#sidebar .section:nth-of-type(4) {
+  display: none !important;
+}
+
+/* Keep Offline & Basemaps collapsed */
+#sidebar .section:nth-of-type(5) > *:not(h2) {
+  display: none !important;
+}
+
+#sidebar .section:nth-of-type(5).offline-open > *:not(h2) {
+  display: block !important;
+}
+
+#sidebar .section:nth-of-type(5) > h2 {
+  cursor: pointer !important;
+}
+
+/* Survey type buttons */
+#collector-primary-modules-v800 {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: .75rem !important;
+  width: 100% !important;
+  margin: .85rem 0 1rem !important;
+}
+
+#start-crop-survey-v800,
+#start-livestock-survey-v800 {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 3.55rem !important;
+  border: 0 !important;
+  border-radius: 16px !important;
+  color: #fff !important;
+  font-size: 1rem !important;
+  font-weight: 900 !important;
+  cursor: pointer !important;
+}
+
+#start-crop-survey-v800 {
+  background: #1f7a3a !important;
+}
+
+#start-livestock-survey-v800 {
+  background: #78909c !important;
+}
+
+/* Before choosing crop/livestock: only Survey Name and buttons show */
+body:not(.module-started-v800) #crop-form .input-group:not(:has(#survey-name)) {
+  display: none !important;
+}
+
+body:not(.module-started-v800) #save-entry-btn,
+body:not(.module-started-v800) #remove-shape-btn,
+body:not(.module-started-v800) #cancel-edit-btn,
+body:not(.module-started-v800) #select-polygon-btn {
+  display: none !important;
+}
+
+/* After choosing crop/livestock: show all real fields */
+body.module-started-v800 #collector-primary-modules-v800 {
+  display: none !important;
+}
+
+body.module-started-v800 #crop-form .input-group {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin-bottom: .8rem !important;
+}
+
+body.module-started-v800 #crop-form #location-group,
+body.module-started-v800 #crop-form .input-group:has(input[type="hidden"]) {
+  display: none !important;
+}
+
+#crop-form input:not([type="hidden"]),
+#crop-form select,
+#crop-form textarea {
+  width: 100% !important;
+  min-height: 2.95rem !important;
+  box-sizing: border-box !important;
+  border: 1px solid #cfe3cf !important;
+  border-radius: 14px !important;
+  background: #fff !important;
+  color: #1f2d1f !important;
+  font-size: .96rem !important;
+}
+
+#crop-form label {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Save button at bottom after form is opened */
+body.module-started-v800 #save-entry-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 3.1rem !important;
+  margin-top: .75rem !important;
+  border-radius: 14px !important;
+  background: #1f7a3a !important;
+  color: #fff !important;
+  font-weight: 900 !important;
+}
+
+body.module-started-v800 #remove-shape-btn,
+body.module-started-v800 #cancel-edit-btn,
+body.module-started-v800 #select-polygon-btn {
+  display: none !important;
+}
+
+/* Better mobile fit */
+@media(max-width:540px){
+  #start-crop-survey-v800,
+  #start-livestock-survey-v800{
+    min-height:3.65rem !important;
+  }
+}
+

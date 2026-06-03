@@ -1,0 +1,618 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Geo-Crop Collector</title>
+<link rel="icon" href="favicon.svg?v=1051" type="image/svg+xml">
+    <link rel="manifest" href="manifest.json?v=1060-field-finish">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css?v=1051" />
+<link rel="stylesheet" href="vendor/leaflet-draw/leaflet.draw.css?v=1051" />
+<script src="vendor/feather/feather.min.js?v=1051"></script>
+<link rel="stylesheet" href="collector.css?v=1051-mobile-collector-pass">
+<link rel="stylesheet" href="collector-final-fixes.css?v=1070-start-card-spacing">
+<link rel="stylesheet" href="offline-sync-workflow.css?v=1051">
+<style>
+body.auth-route-login #app{display:none!important}
+</style>
+
+</head>
+<body>
+<div id="welcome-page"><div class="background-slider"><div class="slide slide-1 active"></div><div class="slide slide-2"></div></div><div class="slide-dots"><div class="slide-dot active" data-slide="0"></div><div class="slide-dot" data-slide="1"></div></div><div class="welcome-content"><div class="logo-icon"><i data-feather="map"></i></div><h1 class="welcome-title">CROP COLLECTOR</h1><p class="welcome-subtitle">Geo-Referenced Agricultural Data Collection for Zimbabwe</p><div class="welcome-features"><div class="feature-item"><i data-feather="edit-3"></i><span>Field Collection</span></div><div class="feature-item"><i data-feather="layers"></i><span>Google Hybrid</span></div><div class="feature-item"><i data-feather="archive"></i><span>Shapefile Export</span></div><div class="feature-item"><i data-feather="cloud-off"></i><span>MBTiles Upload</span></div></div><div class="auth-options"><button class="auth-button" id="sign-in-btn"><i data-feather="log-in"></i> Sign In</button><button class="auth-button" id="create-account-btn"><i data-feather="user-plus"></i> Create Account</button><button class="auth-button guest" id="guest-btn"><i data-feather="user"></i> Continue as Guest</button></div></div><div class="copyright">2026 Crop Collector</div></div>
+<div id="auth-page"><button class="back-button" id="back-to-welcome"><i data-feather="arrow-left"></i> Back</button><div class="auth-container"><div class="auth-header"><h2 id="auth-title">Sign In</h2><p>Access your Crop Collector account</p></div><div id="auth-feedback" class="auth-feedback" role="status" aria-live="polite"></div><div class="auth-tabs"><button class="auth-tab active" id="login-tab">Sign In</button><button class="auth-tab" id="signup-tab">Create Account</button></div><form class="auth-form active" id="login-form" onsubmit="event.preventDefault(); if(window.login){ window.login(); } return false;"><div class="auth-input-group"><input type="text" id="login-username" placeholder=" " required><label for="login-username">Username or Email</label></div><div class="auth-input-group"><input type="password" id="login-password" placeholder=" " required><label for="login-password">Password</label></div><button type="button" class="auth-submit" id="login-submit-btn" onclick="event.preventDefault(); if(window.setAuthFeedback){ window.setAuthFeedback('Sign in button pressed...','info'); } if(window.login){ window.login(); } return false;"><i data-feather="log-in"></i> Sign In</button><div class="auth-switch">Don't have an account? <a id="switch-to-signup">Create one</a></div></form><form class="auth-form" id="signup-form" onsubmit="event.preventDefault(); if(window.signup){ window.signup(); } return false;"><div class="auth-input-group"><input type="text" id="signup-username" placeholder=" " required><label for="signup-username">Username</label></div><div class="auth-input-group"><input type="email" id="signup-email" placeholder=" " required><label for="signup-email">Email</label></div><div class="auth-input-group"><input type="password" id="signup-password" placeholder=" " required><label for="signup-password">Password</label></div><div class="auth-input-group"><input type="password" id="signup-confirm-password" placeholder=" " required><label for="signup-confirm-password">Confirm Password</label></div><button type="submit" class="auth-submit"><i data-feather="user-plus"></i> Create Account</button><div class="auth-switch">Already have an account? <a id="switch-to-login">Sign in</a></div></form></div></div>
+<script>
+(()=>{const ACCESS_TOKEN_KEY='access_token';const GUEST_REDIRECT='WELCOME.html?screen=guest&v=1051';function feedback(message='',type='info'){const el=document.getElementById('auth-feedback');if(!el)return;if(!message){el.textContent='';el.className='auth-feedback';return}el.textContent=message;el.className=`auth-feedback ${type} visible`}function switchAuthView(type='login'){const isLogin=type!=='signup';document.getElementById('welcome-page')?.classList.add('hidden');document.getElementById('auth-page')?.classList.add('visible');document.getElementById('login-tab')?.classList.toggle('active',isLogin);document.getElementById('signup-tab')?.classList.toggle('active',!isLogin);document.getElementById('login-form')?.classList.toggle('active',isLogin);document.getElementById('signup-form')?.classList.toggle('active',!isLogin);const title=document.getElementById('auth-title');if(title)title.textContent=isLogin?'Sign In':'Create Account'}async function submitLogin(){if(typeof window.login==='function'&&window.login!==submitLogin)return window.login();feedback('Sign-in tools are still loading. Please try again in a moment.','info');return false}function startGuestFallback(){localStorage.removeItem(ACCESS_TOKEN_KEY);if(typeof window.startGuest==='function'){window.startGuest();return}document.getElementById('welcome-page')?.classList.add('hidden');return}function boot(){if(window.__cropAuthFallbackBooted)return;window.__cropAuthFallbackBooted=true;document.getElementById('sign-in-btn')?.addEventListener('click',()=>switchAuthView('login'));document.getElementById('create-account-btn')?.addEventListener('click',()=>switchAuthView('signup'));document.getElementById('guest-btn')?.addEventListener('click',startGuestFallback);document.getElementById('back-to-welcome')?.addEventListener('click',()=>{document.getElementById('auth-page')?.classList.remove('visible');document.getElementById('welcome-page')?.classList.remove('hidden');feedback('')});document.getElementById('login-tab')?.addEventListener('click',()=>switchAuthView('login'));document.getElementById('signup-tab')?.addEventListener('click',()=>switchAuthView('signup'));document.getElementById('switch-to-login')?.addEventListener('click',()=>switchAuthView('login'));document.getElementById('switch-to-signup')?.addEventListener('click',()=>switchAuthView('signup'));const route=(new URLSearchParams(window.location.search).get('screen')||window.location.hash.replace('#','')||'').trim().toLowerCase();const hasSavedToken=!!localStorage.getItem(ACCESS_TOKEN_KEY);if(route==='login')switchAuthView('login');if(route==='guest')startGuestFallback()}window.__cropFallbackLogin=submitLogin;if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot()})();
+</script>
+<script>
+(()=>{const route=(new URLSearchParams(window.location.search).get('screen')||window.location.hash.replace('#','')).trim().toLowerCase();if(route==='login'||route==='signin'){window.__collectorForceLogin=true;localStorage.removeItem('access_token');document.body.classList.add('auth-route-login')}})();
+</script>
+<div id="app"><header><div><h1>Crop Collector</h1><p>Geo-Collect for ZINGSA</p></div><div class="header-user"><div class="user-info"><i data-feather="user"></i><span id="username-display">Guest User</span></div><a id="admin-link" href="admin-dashboard.html" class="secondary" style="width:auto;padding:.55rem .8rem;display:none;text-decoration:none"><i data-feather="shield"></i> Admin</a><button type="button" id="logout-btn" class="secondary" style="width:auto;padding:.55rem .8rem;display:none"><i data-feather="log-out"></i> Logout</button><button type="button" class="theme-toggle" id="theme-toggle"><i data-feather="moon"></i></button></div></header><div id="main"><button type="button" class="mobile-menu-toggle" id="sidebar-toggle"><i data-feather="menu"></i></button><div id="map-container"><div id="map"></div><div class="basemap-selector"><i data-feather="layers"></i><select id="basemap-selector"><option value="google_hybrid" selected>Google Hybrid</option><option value="satellite">Satellite Hybrid</option><option value="terrain">Terrain Map</option><option value="osm">OpenStreetMap</option></select></div><div class="mobile-draw-launcher" id="mobile-draw-launcher"><button type="button" id="mobile-gps-fix-btn" class="secondary"><i data-feather="crosshair"></i><span>GPS</span></button><button type="button" id="mobile-draw-polygon-btn"><i data-feather="edit-2"></i><span>Polygon</span></button><button type="button" id="mobile-draw-rectangle-btn" class="secondary"><i data-feather="square"></i><span>Rectangle</span></button></div><div id="map-workflow-banner" class="map-workflow-banner" aria-live="polite"><i data-feather="map-pin"></i><div><strong id="map-workflow-title">Map ready</strong><span id="map-workflow-message">Tap a draw tool to start a point or field boundary.</span></div></div></div><aside id="sidebar"><div class="section"><h2><i data-feather="activity"></i> Mode</h2><div class="mode-toggle"><button type="button" id="mode-collect" class="active">Collect</button><button type="button" id="mode-validate">Validate</button></div><div id="collect-form"><h2 id="collect-form-heading"><i data-feather="edit-3"></i> Start Survey</h2><div id="collector-feedback" class="status collector-feedback info" hidden role="status" aria-live="polite"><div id="collector-feedback-message" class="collector-feedback-message"></div><button type="button" id="collector-feedback-close" class="icon-btn" aria-label="Dismiss collector message"><i data-feather="x"></i></button></div><div id="collector-primary-modules" class="status collector-start-card"><div class="questionnaire-group-title">Start Survey</div><p class="collector-start-help">Select the active survey, then choose the field form for this record.</p><div class="input-group" id="collector-survey-menu-group"><select id="collector-survey-name"><option value="" selected>Select survey name</option></select><label for="collector-survey-name">Survey Name</label></div><div class="button-group" id="collector-primary-module-switch"><button type="button" id="collector-open-crop"><span class="save-flow-chip">CROP</span> Start Crop Survey</button><button type="button" id="collector-open-livestock" class="secondary"><span class="save-flow-chip">LIVESTOCK</span> Start Livestock Survey</button></div><div class="status" id="collector-module-active-label">Choose a survey type to begin.</div><div id="collector-odk-nav" class="button-group"><button type="button" id="collector-odk-back" class="secondary">Back</button><button type="button" id="collector-odk-next">Next</button></div><div id="collector-odk-step-label">Choose a survey name, then start Crop or Livestock.</div></div><form id="crop-form" novalidate>
+        <input type="hidden" id="photo-name" name="photo_name" value="">
+        <input type="hidden" id="photo-data" name="photo_data" value="">
+        <div class="input-group">
+          <select id="survey-name" name="survey_name" required><option value="" selected>Select survey name</option></select>
+          <label for="survey-name">Survey Name</label>
+        </div>
+        <div class="input-group common-field">
+          <input type="text" id="questionnaire-id" name="questionnaire_id" placeholder=" ">
+          <label for="questionnaire-id">Questionnaire ID</label>
+        </div>
+        <div class="input-group common-field">
+          <input type="text" id="aeo-name" name="aeo_name" placeholder=" ">
+          <label for="aeo-name">Name of AEO</label>
+        </div>
+        <div class="input-group common-field">
+          <input type="tel" id="aeo-contact-number" name="aeo_contact_number" placeholder=" ">
+          <label for="aeo-contact-number">AEO Contact Number</label>
+        </div>
+        <div class="input-group">
+          <input type="text" id="owner-name" name="owner_name" placeholder=" " required>
+          <label for="owner-name">Farmer / Owner Name</label>
+        </div>
+        <div class="input-group">
+          <input type="text" id="farm-name" name="farm_name" placeholder=" ">
+          <label for="farm-name">Farm Name</label>
+        </div>
+        <div class="input-group">
+          <input type="tel" id="farmer-contact" name="farmer_contact" placeholder=" ">
+          <label for="farmer-contact">Farmer or Manager Contact</label>
+        </div>
+        <div class="input-group" id="location-group" style="display:none" hidden aria-hidden="true">
+          <input type="hidden" id="location-name" name="location_name" placeholder=" ">
+        </div>
+        <input type="hidden" id="capture-type" name="capture_type" value="polygon">
+        <div class="input-group">
+          <select id="sector" name="sector" required>
+            <option value="" disabled selected></option>
+            <option value="Large">Large</option>
+            <option value="A1">A1</option>
+            <option value="A2">A2</option>
+            <option value="Other">Other</option>
+          </select>
+          <label for="sector">Sector</label>
+        </div>
+        <div class="input-group">
+          <select id="crop-type" name="crop_type" required>
+            <option value="" disabled selected></option>
+            <optgroup label="Major Cash Crops">
+              <option value="tobacco">Tobacco</option>
+              <option value="cotton">Cotton</option>
+              <option value="maize">Maize (Chibage)</option>
+              <option value="wheat">Wheat</option>
+              <option value="sorghum">Sorghum</option>
+              <option value="millet">Millet</option>
+              <option value="cassava">Cassava</option>
+            </optgroup>
+            <optgroup label="Minor Cash Crops">
+              <option value="groundnuts">Groundnuts</option>
+              <option value="sunflower">Sunflower</option>
+              <option value="sugar_cane">Sugar Cane</option>
+              <option value="coffee">Coffee</option>
+              <option value="tea">Tea</option>
+              <option value="soybeans">Soybeans</option>
+              <option value="sesame">Sesame</option>
+            </optgroup>
+            <optgroup label="Horticulture and Vegetables">
+              <option value="citrus">Citrus</option>
+              <option value="avocado">Avocado</option>
+              <option value="mango">Mango</option>
+              <option value="banana">Banana</option>
+              <option value="tomatoes">Tomatoes</option>
+              <option value="onions">Onions</option>
+              <option value="potatoes">Potatoes</option>
+              <option value="cabbage">Cabbage</option>
+              <option value="spinach">Spinach</option>
+              <option value="sweet_potato">Sweet Potato</option>
+              <option value="okra">Okra</option>
+              <option value="Eggplant">Eggplant</option>
+            </optgroup>
+            <optgroup label="Other Crops">
+              <option value="other">Other</option>
+            </optgroup>
+          </select>
+          <label for="crop-type">Crop Type</label>
+        </div>
+        <div class="input-group crop-main-field">
+          <input type="text" id="crop-variety" name="crop_variety" placeholder=" ">
+          <label for="crop-variety">Crop Variety</label>
+        </div>
+        <div class="input-group crop-main-field">
+          <input type="number" id="planted-area-ha" name="planted_area_ha" placeholder=" ">
+          <label for="planted-area-ha">Planted Area (ha)</label>
+        </div>
+        <div class="input-group crop-main-field">
+          <select id="fertilizer-application" name="fertilizer_application">
+            <option value="">Select fertilizer application</option>
+            <option value="None">None</option>
+            <option value="Basal">Basal</option>
+            <option value="Top dressing">Top dressing</option>
+            <option value="Both basal and top dressing">Both basal and top dressing</option>
+            <option value="Organic manure">Organic manure</option>
+            <option value="Other">Other</option>
+          </select>
+          <label for="fertilizer-application">Fertilizer Application</label>
+        </div>
+        <div class="input-group crop-main-field">
+          <select id="pest-disease-status" name="pest_disease_status">
+            <option value="">Select pest / disease status</option>
+            <option value="None observed">None observed</option>
+            <option value="Low">Low</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Severe">Severe</option>
+            <option value="Not sure">Not sure</option>
+          </select>
+          <label for="pest-disease-status">Pest / Disease Status</label>
+        </div>
+        <div class="input-group">
+          <select id="province" name="province">
+            <option value="">Select province</option>
+            <option>Harare Metropolitan</option>
+            <option>Bulawayo Metropolitan</option>
+            <option>Manicaland</option>
+            <option>Mashonaland Central</option>
+            <option>Mashonaland East</option>
+            <option>Mashonaland West</option>
+            <option>Masvingo</option>
+            <option>Matabeleland North</option>
+            <option>Matabeleland South</option>
+            <option>Midlands</option>
+          </select>
+          <label for="province">Province</label>
+        </div>
+        <div class="input-group">
+          <select id="district" name="district">
+            <option value="">Select province first</option>
+          </select>
+          <label for="district">District</label>
+        </div>
+        <div class="input-group">
+          <input type="text" id="ward" name="ward" placeholder=" ">
+          <label for="ward">Ward Number</label>
+        </div>
+        <div class="input-group">
+          <select id="aez" name="aez">
+            <option value="">Select AEZ</option>
+            <option>Natural Region I</option>
+            <option>Natural Region II</option>
+            <option>Natural Region III</option>
+            <option>Natural Region IV</option>
+            <option>Natural Region V</option>
+          </select>
+          <label for="aez">AEZ</label>
+        </div>
+        <div class="input-group">
+          <select id="growth-stage" name="growth_stage" required>
+            <option value="planting" selected>Planting</option>
+            <option value="germination">Germination</option>
+            <option value="vegetative">Vegetative</option>
+            <option value="flowering">Flowering</option>
+            <option value="maturity">Maturity</option>
+            <option value="harvested">Harvested</option>
+          </select>
+          <label for="growth-stage">Growth Stage</label>
+        </div>
+        <div class="input-group">
+          <select id="crop-condition" name="crop_condition">
+            <option value="" selected></option>
+            <option value="Excellent">Excellent</option>
+            <option value="Good">Good</option>
+            <option value="Fair">Fair</option>
+            <option value="Poor">Poor</option>
+          </select>
+          <label for="crop-condition">Crop Condition</label>
+        </div>
+        <div class="input-group">
+          <select id="season" name="season">
+            <option value="" selected></option>
+            <option value="Summer">Summer</option>
+            <option value="Winter">Winter</option>
+            <option value="Autumn">Autumn</option>
+            <option value="Spring">Spring</option>
+          </select>
+          <label for="season">Season</label>
+        </div>
+        <div class="input-group">
+          <select id="irrigation-type" name="irrigation_type">
+            <option value="" selected></option>
+            <option value="Rainfed">Rainfed</option>
+            <option value="Irrigated">Irrigated</option>
+            <option value="Supplementary">Supplementary</option>
+          </select>
+          <label for="irrigation-type">Irrigation</label>
+        </div>
+        <div class="input-group">
+          <input type="date" id="planting-date" name="planting_date" placeholder=" ">
+          <label for="planting-date">Planting Date</label>
+        </div>
+        <div class="input-group">
+          <input type="number" step="0.01" id="yield-expected" name="yield_expected" placeholder=" ">
+          <label for="yield-expected">Yield Expected (tonnes)</label>
+        </div>
+        <div class="input-group">
+          <input type="date" id="harvest-date" name="harvest_date" placeholder=" ">
+          <label for="harvest-date">Harvest Date</label>
+        </div>
+        <div class="input-group">
+          <input type="number" step="0.01" id="yield-tonnes" name="yield_tonnes" placeholder=" ">
+          <label for="yield-tonnes">Yield in Tonnes</label>
+        </div>
+        <div class="input-group">
+          <textarea id="observation-notes" name="observation_notes" rows="2" placeholder=" "></textarea>
+          <label for="observation-notes">Observation Notes</label>
+        </div>
+        <div class="input-group">
+          <textarea id="post-harvest-assessment" name="post_harvest_assessment" rows="2" placeholder=" "></textarea>
+          <label for="post-harvest-assessment">Post Harvest Assessment</label>
+        </div>
+        
+        <div class="input-group livestock-main-field">
+          <select id="livestock-farm-type" name="livestock_farm_type">
+            <option value="">Select livestock farm type</option>
+            <option value="Smallholder">Smallholder</option>
+            <option value="Commercial">Commercial</option>
+            <option value="A1">A1</option>
+            <option value="A2">A2</option>
+            <option value="Institutional">Institutional</option>
+            <option value="Other">Other</option>
+          </select>
+          <label for="livestock-farm-type">Livestock Farm Type</label>
+        </div>
+        <div class="input-group livestock-main-field">
+          <select id="livestock-main-enterprise" name="livestock_main_enterprise">
+            <option value="">Select main livestock enterprise</option>
+            <option value="Beef">Beef</option>
+            <option value="Dairy">Dairy</option>
+            <option value="Mixed livestock">Mixed livestock</option>
+            <option value="Small stock">Small stock</option>
+            <option value="Poultry">Poultry</option>
+            <option value="Other">Other</option>
+          </select>
+          <label for="livestock-main-enterprise">Main Livestock Enterprise</label>
+        </div>
+        <div class="input-group livestock-main-field">
+          <input type="number" id="livestock-total-animals" name="livestock_total_animals" placeholder=" ">
+          <label for="livestock-total-animals">Total Number of Animals</label>
+        </div>
+        <div class="input-group livestock-main-field">
+          <select id="livestock-production-purpose" name="livestock_production_purpose">
+            <option value="">Select production purpose</option>
+            <option value="Subsistence">Subsistence</option>
+            <option value="Commercial">Commercial</option>
+            <option value="Breeding">Breeding</option>
+            <option value="Dairy">Dairy</option>
+            <option value="Meat production">Meat production</option>
+            <option value="Mixed purpose">Mixed purpose</option>
+          </select>
+          <label for="livestock-production-purpose">Production Purpose</label>
+        </div>
+        <div class="input-group livestock-main-field">
+          <select id="livestock-management-system" name="livestock_management_system">
+            <option value="">Select management system</option>
+            <option value="Extensive">Extensive</option>
+            <option value="Semi-intensive">Semi-intensive</option>
+            <option value="Intensive">Intensive</option>
+            <option value="Mixed">Mixed</option>
+          </select>
+          <label for="livestock-management-system">Management System</label>
+        </div>
+        <div class="input-group livestock-main-field">
+          <select id="livestock-grazing-system" name="livestock_grazing_system">
+            <option value="">Select grazing system</option>
+            <option value="Communal grazing">Communal grazing</option>
+            <option value="Paddocked grazing">Paddocked grazing</option>
+            <option value="Zero grazing">Zero grazing</option>
+            <option value="Mixed grazing">Mixed grazing</option>
+          </select>
+          <label for="livestock-grazing-system">Grazing System</label>
+        </div>
+        <div class="input-group livestock-main-field">
+          <select id="livestock-feed-availability" name="livestock_feed_availability">
+            <option value="">Select feed availability</option>
+            <option value="Adequate">Adequate</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Low">Low</option>
+            <option value="Critical">Critical</option>
+          </select>
+          <label for="livestock-feed-availability">Feed Availability</label>
+        </div>
+        <div class="input-group livestock-main-field">
+          <select id="livestock-water-source" name="livestock_water_source">
+            <option value="">Select water source</option>
+            <option value="Borehole">Borehole</option>
+            <option value="Dam">Dam</option>
+            <option value="River/stream">River/stream</option>
+            <option value="Well">Well</option>
+            <option value="Piped water">Piped water</option>
+            <option value="Other">Other</option>
+          </select>
+          <label for="livestock-water-source">Water Source</label>
+        </div>
+        <div class="input-group livestock-main-field">
+          <select id="livestock-health-status" name="livestock_health_status">
+            <option value="">Select general health status</option>
+            <option value="Good">Good</option>
+            <option value="Fair">Fair</option>
+            <option value="Poor">Poor</option>
+            <option value="Disease suspected">Disease suspected</option>
+          </select>
+          <label for="livestock-health-status">General Health Status</label>
+        </div>
+        <div class="input-group livestock-main-field">
+          <select id="livestock-disease-observed" name="livestock_disease_observed">
+            <option value="">Select disease signs observed</option>
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+            <option value="Not sure">Not sure</option>
+          </select>
+          <label for="livestock-disease-observed">Disease Signs Observed</label>
+        </div>
+        <div class="input-group livestock-main-field">
+          <select id="livestock-vet-access" name="livestock_vet_access">
+            <option value="">Select access to veterinary services</option>
+            <option value="Available">Available</option>
+            <option value="Limited">Limited</option>
+            <option value="Not available">Not available</option>
+          </select>
+          <label for="livestock-vet-access">Access to Veterinary Services</label>
+        </div>
+        <div class="input-group livestock-main-field">
+          <select id="livestock-vaccination-status" name="livestock_vaccination_status">
+            <option value="">Select vaccination status</option>
+            <option value="Up to date">Up to date</option>
+            <option value="Partly vaccinated">Partly vaccinated</option>
+            <option value="Not vaccinated">Not vaccinated</option>
+            <option value="Unknown">Unknown</option>
+          </select>
+          <label for="livestock-vaccination-status">Vaccination Status</label>
+        </div>
+        <div class="input-group livestock-main-field">
+          <select id="livestock-mortality-reported" name="livestock_mortality_reported">
+            <option value="">Select recent mortality reported</option>
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+          </select>
+          <label for="livestock-mortality-reported">Recent Mortality Reported</label>
+        </div>
+        <div class="input-group livestock-main-field">
+          <select id="livestock-market-access" name="livestock_market_access">
+            <option value="">Select market access</option>
+            <option value="Good">Good</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Poor">Poor</option>
+            <option value="No access">No access</option>
+          </select>
+          <label for="livestock-market-access">Market Access</label>
+        </div>
+        <div class="input-group livestock-main-field">
+          <select id="livestock-housing-condition" name="livestock_housing_condition">
+            <option value="">Select housing condition</option>
+            <option value="Good">Good</option>
+            <option value="Fair">Fair</option>
+            <option value="Poor">Poor</option>
+            <option value="Not applicable">Not applicable</option>
+          </select>
+          <label for="livestock-housing-condition">Housing Condition</label>
+        </div>
+        <div class="input-group livestock-main-field">
+          <select id="livestock-manure-management" name="livestock_manure_management">
+            <option value="">Select manure management</option>
+            <option value="Collected">Collected</option>
+            <option value="Used as fertilizer">Used as fertilizer</option>
+            <option value="Disposed">Disposed</option>
+            <option value="Not managed">Not managed</option>
+          </select>
+          <label for="livestock-manure-management">Manure Management</label>
+        </div>
+        <div class="input-group">
+          <textarea id="notes" name="notes" rows="3" placeholder=" "></textarea>
+          <label for="notes">Notes</label>
+        </div>
+        <button type="submit" id="save-entry-btn"><i data-feather="save"></i> Save Entry</button>
+        <button type="button" id="remove-shape-btn" class="danger" style="display:none;margin-top:10px"><i data-feather="trash-2"></i> Delete Mistake</button>
+        <button type="button" id="cancel-edit-btn" class="secondary" style="display:none;margin-top:10px"><i data-feather="x-circle"></i> Cancel Edit</button>
+        <button type="button" id="select-polygon-btn" class="warning" style="display:none;margin-top:10px"><i data-feather="map-pin"></i> Select Polygon First</button>
+      </form></div><div id="validate-form" style="display:none"><h2><i data-feather="check-circle"></i> Validate Feature</h2><div class="status" id="validation-target">Select a synced field entry to validate.</div><form id="validate-form-el" novalidate><div class="input-group"><select id="validation-status" required><option value="correct">Correct</option><option value="incorrect">Incorrect</option><option value="uncertain" selected>Uncertain</option></select><label for="validation-status">Validation Status</label></div><div class="input-group"><select id="confidence" required><option value="5">5 - Very Sure</option><option value="4">4</option><option value="3" selected>3</option><option value="2">2</option><option value="1">1 - Not Sure</option></select><label for="confidence">Confidence</label></div><div class="input-group"><textarea id="validation-note" rows="3" placeholder=" "></textarea><label for="validation-note">Validation Note</label></div><button type="submit"><i data-feather="check"></i> Submit Validation</button></form></div></div><div class="section"><h2><i data-feather="database"></i> Entries (<span id="field-count">0 / 0</span>)</h2><ul id="fields-list" class="entries"></ul><div class="button-group"><button type="button" id="export-csv"><i data-feather="file-text"></i> CSV</button><button type="button" id="export-geojson"><i data-feather="globe"></i> GeoJSON</button><button type="button" id="export-kml"><i data-feather="map"></i> KML</button><button type="button" id="export-shp"><i data-feather="archive"></i> Shapefile</button><button type="button" id="clear-all" class="danger"><i data-feather="trash-2"></i> Clear</button></div></div><div class="section"><h2><i data-feather="cpu"></i> Operations</h2><div class="ops-panel"><div class="ops-grid"><div class="ops-item"><strong>App Version</strong><span id="ops-app-version">-</span></div><div class="ops-item"><strong>Server Version</strong><span id="ops-server-version">-</span></div><div class="ops-item"><strong>Collector</strong><span id="ops-collector">-</span></div><div class="ops-item"><strong>Connection</strong><span id="ops-connection">Checking...</span></div><div class="ops-item"><strong>PostGIS</strong><span id="ops-postgis">-</span></div><div class="ops-item"><strong>Last Sync</strong><span id="ops-last-sync">No sync yet</span></div></div><div class="ops-history"><strong>Sent to Server History</strong><ul id="ops-history-list" class="ops-history-list"><li class="ops-history-item empty">No sync activity yet.</li></ul></div></div></div><div class="section"><h2><i data-feather="smartphone"></i> Field Readiness</h2><div class="ops-panel"><div class="ops-grid"><div class="ops-item"><strong>Location Permission</strong><span id="mobile-permission-status">Checking...</span></div><div class="ops-item"><strong>GPS Status</strong><span id="mobile-gps-status">Waiting for location</span></div><div class="ops-item"><strong>Crop Geofence</strong><span id="mobile-geofence-status">Applies to crop save only</span></div><div class="ops-item"><strong>Photo Evidence</strong><span id="mobile-photo-status">Attach when prompted</span></div><div class="ops-item"><strong>Offline Maps</strong><span id="mobile-mbtiles-status">Load MBTiles before going offline</span></div></div></div></div><div class="section"><h2><i data-feather="cloud-off"></i> Offline & Basemaps</h2><div class="status" id="mbtiles-guidance">Load an MBTiles basemap before you leave network coverage. The map stays available in this browser session for field navigation and polygon capture.</div><div class="button-group"><button type="button" id="upload-mbtiles"><i data-feather="upload"></i> Upload MBTiles</button><button type="button" id="clear-mbtiles" class="secondary"><i data-feather="layers"></i> Clear MBTiles</button></div><div class="button-group"><button type="button" id="push-all-server"><i data-feather="cloud"></i> Push All Pending</button><button type="button" id="refresh-entries" class="secondary"><i data-feather="refresh-cw"></i> Refresh</button></div><input type="file" id="mbtiles-file" accept=".mbtiles,.sqlite" style="display:none"><div class="status" id="offline-status">Online mode. Sign in to sync with backend, or use guest mode locally.</div><div id="mbtiles-debug-status" class="status" hidden></div><div class="status-grid"><div class="status-card"><strong id="pending-count">0</strong><span>Pending Sync</span></div><div class="status-card"><strong id="synced-count">0</strong><span>Synced Records</span></div><div class="status-card"><strong id="failed-count">0</strong><span>Need Attention</span></div></div></div></aside></div></div>
+<script src="vendor/leaflet/leaflet.js?v=1051"></script>
+<script src="vendor/leaflet-draw/leaflet.draw.js?v=1051"></script>
+<script src="vendor/leaflet-geometryutil/leaflet.geometryutil.js?v=1051"></script>
+<script src="vendor/sqljs/sql-wasm.js?v=1051"></script>
+
+
+<script id="early-safe-v1000">
+(function(){
+  try{
+    if(window.HTMLOptionsCollection && !window.HTMLOptionsCollection.prototype[Symbol.iterator]){
+      window.HTMLOptionsCollection.prototype[Symbol.iterator]=Array.prototype[Symbol.iterator];
+    }
+    if(window.HTMLCollection && !window.HTMLCollection.prototype[Symbol.iterator]){
+      window.HTMLCollection.prototype[Symbol.iterator]=Array.prototype[Symbol.iterator];
+    }
+  }catch(e){}
+})();
+</script>
+
+    <script src="app-db.js?v=1066-survey-placeholder-bold"></script>
+<script src="app-wizard.js?v=1051-mobile-collector-pass"></script>
+<script src="app-map.js?v=1051"></script>
+<script src="app-sync.js?v=1054-new-record-reset"></script>
+<script src="app-sync-hotfix.js?v=1051"></script>
+
+<script id="safe-startapp-v1000">
+(function(){
+  const SAFE={displayName:'Cleopas',username:'Cleopas',role:'collector',email:'cleopasmugwagwa21@gmail.com'};
+  function norm(u){u=(u&&typeof u==='object')?u:{};return Object.assign({},SAFE,u,{displayName:u.displayName||u.full_name||u.name||u.username||u.email||SAFE.displayName,username:u.username||u.displayName||u.email||SAFE.username,role:u.role||SAFE.role});}
+  window.__collectorGetSafeUser=async function(){return norm({});};
+  function patch(){if(typeof window.startApp==='function'&&!window.startApp.__safe1000){const old=window.startApp;window.startApp=function(user){return old.call(this,norm(user));};window.startApp.__safe1000=true;}}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',patch,{once:true});else patch();
+  setTimeout(patch,50);setTimeout(patch,300);
+})();
+</script>
+
+
+<script src="geography-map.js?v=1051"></script>
+<script src="geography-controls.js?v=1051"></script>
+<script src="ministry-full-headers.js?v=1051"></script>
+<script src="ministry-full-form.js?v=1051"></script>
+<script>
+(function collectorRouteBootstrap(){
+  function showCollectorShell(){
+    const welcome=document.getElementById('welcome-page');
+    const auth=document.getElementById('auth-page');
+    const app=document.getElementById('app');
+    if(welcome){ welcome.classList.add('hidden'); welcome.style.display='none'; }
+    if(auth){ auth.classList.remove('visible'); auth.style.display='none'; }
+    if(app){ app.style.display='block'; app.classList.add('visible'); }
+  }
+
+  async function startCollectorFromRoute(){
+    const params=new URLSearchParams(window.location.search);
+    const screen=String(params.get('screen')||'').toLowerCase();
+    if(screen!=='collector' && screen!=='guest') return;
+    if(window.__collectorRouteStarted) return;
+    window.__collectorRouteStarted=true;
+
+    showCollectorShell();
+
+    try{
+      if(screen==='collector'){
+        const token=localStorage.getItem('access_token');
+        if(!token){
+          console.warn('[Route] Collector requested without access_token. Returning to login.');
+          window.__collectorRouteStarted=false;
+          window.location.replace('WELCOME.html?screen=login&v=1051');
+          return;
+        }
+        const user = typeof window.__collectorGetSafeUser==='function'
+          ? await window.__collectorGetSafeUser()
+          : {displayName:'Logged in User', username:'user', role:'user'};
+        if(typeof window.__collectorApplyUserToUi==='function') window.__collectorApplyUserToUi(user);
+        if(typeof window.startApp==='function') await window.startApp(user);
+        else throw new Error('startApp is not available. Check app-sync.js loading order.');
+      }else{
+        if(typeof window.startGuest==='function') await window.startGuest();
+        else if(typeof window.startApp==='function') await window.startApp({displayName:'Guest User', username:'guest', role:'guest'});
+        else throw new Error('startGuest/startApp is not available. Check app-sync.js loading order.');
+      }
+    }catch(error){
+      console.error('Failed to start collector route:', error);
+      const status=document.getElementById('offline-status');
+      if(status) status.textContent='Collector startup failed: '+(error.message||error);
+    }
+
+    setTimeout(()=>{
+      if(window.map && typeof window.map.invalidateSize==='function') window.map.invalidateSize();
+      if(window.collectorMap && typeof window.collectorMap.invalidateSize==='function') window.collectorMap.invalidateSize();
+    },300);
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', startCollectorFromRoute, {once:true});
+  else startCollectorFromRoute();
+})();
+</script>
+
+<script>
+const CORE_REGISTRATION_FLOW=['survey-name','questionnaire-id','owner-name','farm-name','farmer-contact','province','district','ward','aez','sector','aeo-name','collector-draw-section'];
+// Continue to More Details
+// Crop survey uses polygons and can move through multiple crops on one farm
+// one continuous form
+// collector-primary-module-switch
+// collector-module-livestock
+// bindPress('quick-menu-logout',logout)
+// bindPress('save-next-plot-btn',saveNextPlotForFarmer)
+// bindPress('refresh-entries',refreshCollectorData)
+// document.getElementById('validate-form-el')?.closest('.section')
+// The map is still loading. Try the map control again in a moment.
+// bindPress('login-submit-btn',async()=>{await login()})
+// Choose one or more crops first. Then use the map tools to draw the polygon for the current crop
+</script>
+<script>
+(function installRobustCropCollectorLogin(){
+  const ACCESS_TOKEN_KEY = 'access_token';
+  function getApiUrl(){
+    const host = (window.location.hostname && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1')
+      ? window.location.hostname
+      : '127.0.0.1';
+    return `http://${host}:8000/api/v1`;
+  }
+  function setAuthFeedback(message='', type='info'){
+    const el = document.getElementById('auth-feedback');
+    if(!el) return;
+    el.textContent = message;
+    el.className = message ? `auth-feedback ${type} visible` : 'auth-feedback';
+  }
+  window.setAuthFeedback = window.setAuthFeedback || setAuthFeedback;
+  function postForm(url, payload){
+    return new Promise((resolve, reject)=>{
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', url, true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
+      xhr.setRequestHeader('Accept', 'application/json');
+      xhr.timeout = 15000;
+      xhr.onload = function(){
+        let data = null;
+        try { data = xhr.responseText ? JSON.parse(xhr.responseText) : null; }
+        catch { data = { detail: xhr.responseText || 'Invalid server response' }; }
+        if(xhr.status >= 200 && xhr.status < 300) resolve(data || {});
+        else reject(new Error((data && (data.detail || data.message)) || `Login failed with HTTP ${xhr.status}`));
+      };
+      xhr.onerror = function(){ reject(new Error(`No response from backend at ${url}. Confirm backend is running on port 8000.`)); };
+      xhr.ontimeout = function(){ reject(new Error(`Backend timed out at ${url}.`)); };
+      const body = new URLSearchParams(payload).toString();
+      xhr.send(body);
+    });
+  }
+  window.login = async function robustLogin(){
+    const username = String(document.getElementById('login-username')?.value || '').trim();
+    const password = String(document.getElementById('login-password')?.value || '');
+    if(!username || !password){
+      setAuthFeedback('Enter username/email and password.', 'error');
+      return false;
+    }
+    const btn = document.getElementById('login-submit-btn');
+    const oldHtml = btn ? btn.innerHTML : '';
+    if(btn){ btn.disabled = true; btn.innerHTML = 'Signing in...'; }
+    try{
+      const apiUrl = getApiUrl();
+      const endpoints = [
+        `${apiUrl}/auth/login/access-token`,
+        `${apiUrl}/auth/login`
+      ];
+      let data = null;
+      let lastError = null;
+      for(const endpoint of endpoints){
+        try{
+          data = await postForm(endpoint, { username, password });
+          if(data && data.access_token) break;
+          lastError = new Error('Server responded, but no access_token was returned.');
+        }catch(error){
+          lastError = error;
+        }
+      }
+      if(!data || !data.access_token) throw lastError || new Error('Login failed.');
+      localStorage.setItem(ACCESS_TOKEN_KEY, data.access_token);
+      setAuthFeedback('Login successful. Opening collector...', 'success');
+      window.location.replace('WELCOME.html?screen=collector&v=1051');
+      return true;
+    }catch(error){
+      console.error('Robust login failed:', error);
+      setAuthFeedback(error.message || 'Login failed.', 'error');
+      return false;
+    }finally{
+      if(btn){ btn.disabled = false; btn.innerHTML = oldHtml || 'Sign In'; }
+    }
+  };
+})();
+</script>
+<script src="geometry-capture-fix.js?v=1051"></script>
+    <script src="offline-sync-engine.js?v=1055-release-audit"></script>
+<script src="collector-final-fixes.js?v=1051"></script>
+<script src="login-button-polish.js?v=1051"></script>
+
+    <script src="collector-form-open-save-fix-v1030.js?v=1058-release-audit-final-reset"></script>
+    <script src="draft-queue-polish-v1050.js?v=1051-clean-display-fast"></script>
+    <script src="collector-photo-evidence-v1060.js?v=1060-field-finish"></script>
+    <script src="collector-mobile-field-test-v1062.js?v=1062-mobile-crop-map-guidance"></script>
+    <script src="collector-clean-test-session-v1063.js?v=1063-clean-test-session"></script>
+    <script src="collector-display-cleanup-v1050.js?v=1069-remove-helper-copy"></script>
+</body>
+</html>

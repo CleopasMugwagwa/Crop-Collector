@@ -1,0 +1,160 @@
+:root {
+  --primary: #2e7d32;
+  --primary-dark: #1b5e20;
+  --accent: #4caf50;
+  --bg: #f8fff8;
+  --card: #fff;
+  --text: #212121;
+  --border: #e0e0e0;
+  --shadow: 0 4px 12px rgba(0,0,0,.08);
+  --radius: 16px;
+  --chip-bg: #e8f5e9;
+  --chip-text: #1b5e20;
+}
+
+[data-theme="dark"] {
+  --bg: #121212;
+  --card: #1e1e1e;
+  --text: #e0e0e0;
+  --border: #333;
+  --primary: #66bb6a;
+  --primary-dark: #388e3c;
+  --chip-bg: #1e3a1e;
+  --chip-text: #66bb6a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, sans-serif; }
+body { background: var(--bg); color: var(--text); line-height: 1.5; overflow-x: hidden; }
+
+#app { display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+
+/* Header Fix for Leaflet Layering */
+header {
+  background: var(--primary);
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+  position: relative;
+  box-shadow: var(--shadow);
+  z-index: 1100; /* Higher than Leaflet's 1000 */
+}
+header h1 { font-size: 1.4rem; font-weight: 600; }
+header p { font-size: .8rem; opacity: .8; }
+
+.theme-toggle { position: absolute; right: 1rem; top: 1.2rem; background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; }
+
+#main { flex: 1; display: flex; overflow: hidden; }
+#map-container { flex: 1; position: relative; z-index: 1; }
+#map { height: 100%; width: 100%; }
+
+#sidebar {
+  width: 360px;
+  background: var(--card);
+  padding: 1.5rem;
+  overflow-y: auto;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  z-index: 1050;
+}
+
+/* Section Styling */
+.section {
+  background: var(--card);
+  padding: 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+.section h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+/* Form Group Fixes */
+.input-group { position: relative; margin-bottom: 1.5rem; }
+.input-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+.input-group input,
+.input-group select,
+.input-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--text);
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+.input-group input:focus, .input-group select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* Button & UI Elements */
+.mode-toggle { display: flex; background: #eee; padding: 4px; border-radius: 50px; }
+.mode-toggle button {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  background: transparent;
+  font-weight: 500;
+}
+.mode-toggle button.active { background: var(--primary); color: #fff; }
+
+button.main-btn {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 12px;
+  font-weight: 600;
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* ZINGSA Field Cards */
+#fields-list { display: flex; flex-direction: column; gap: 0.8rem; }
+.field-card {
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  transition: transform 0.2s;
+}
+.field-card:hover { transform: scale(1.02); }
+
+.growth-chip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  background: var(--chip-bg);
+  color: var(--chip-text);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Responsive Logic */
+@media (max-width: 768px) {
+  #main { flex-direction: column; }
+  #sidebar { width: 100%; height: 40vh; border-top: 2px solid var(--border); }
+  #map-container { height: 60vh; }
+}

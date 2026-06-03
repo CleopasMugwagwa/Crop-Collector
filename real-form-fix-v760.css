@@ -1,0 +1,181 @@
+
+
+/* ============================================================
+   REAL FORM FIX v760
+   Use the actual form in WELCOME.html. No DOM parent/child moving.
+   ============================================================ */
+
+#collector-quick-menu,
+.quick-menu-note,
+.quick-menu-description,
+.quick-menu-helper,
+#required-progress,
+#completion-status,
+#next-questions,
+#quality-score,
+#wizard-progress,
+#collector-progress,
+#form-progress,
+.progress-card,
+.form-progress,
+.setup-progress,
+.question-progress,
+.step-progress,
+.quality-card,
+.quality-score-card,
+#crop-form .step-label,
+#crop-form .step-summary,
+#crop-form .setup-step,
+#crop-form .question-step,
+#crop-form .status:not(.error):not(.warning),
+#collector-feedback,
+.collector-feedback,
+#save-flow-card,
+.save-flow-card,
+#geometry-edit-status,
+#save-action-stack,
+.save-action-stack {
+  display: none !important;
+}
+
+/* Hide crowded non-essential sections */
+#collector-settings-section,
+#sidebar .section.hide-in-collector-final,
+#sidebar .section.final-hide-in-collector,
+#sidebar .section.final-hide-entries,
+#sidebar .section.final-hide-sync {
+  display: none !important;
+}
+
+/* Main collector form must remain visible */
+#collect-form,
+#crop-form {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+#collect-form-heading {
+  display: flex !important;
+  visibility: visible !important;
+}
+
+/* The actual form fields */
+#crop-form .input-group {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  max-height: none !important;
+  margin-bottom: .8rem !important;
+}
+
+#crop-form #location-group,
+#crop-form .input-group:has(input[type="hidden"]) {
+  display: none !important;
+}
+
+#crop-form input:not([type="hidden"]),
+#crop-form select,
+#crop-form textarea {
+  width: 100% !important;
+  min-height: 2.95rem !important;
+  border: 1px solid #cfe3cf !important;
+  border-radius: 14px !important;
+  background: #fff !important;
+  color: #1f2d1f !important;
+  font-size: .96rem !important;
+  box-sizing: border-box !important;
+}
+
+#crop-form label {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Clean survey module buttons */
+#collector-primary-modules-v760 {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: .75rem !important;
+  width: 100% !important;
+  margin: .75rem 0 1rem !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+#start-crop-survey-v760,
+#start-livestock-survey-v760 {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 3.45rem !important;
+  border: 0 !important;
+  border-radius: 16px !important;
+  color: #fff !important;
+  font-weight: 900 !important;
+  font-size: 1rem !important;
+  cursor: pointer !important;
+}
+
+#start-crop-survey-v760 { background: #1f7a3a !important; }
+#start-livestock-survey-v760 { background: #78909c !important; }
+
+/* Once a module starts, hide module chooser and show real fields */
+body.module-started-v760 #collector-primary-modules-v760 {
+  display: none !important;
+}
+
+/* Before module starts, show only survey name and module choice */
+body:not(.module-started-v760) #crop-form .input-group:not(.survey-name-visible-v760) {
+  display: none !important;
+}
+
+body:not(.module-started-v760) #save-entry-btn,
+body:not(.module-started-v760) #remove-shape-btn,
+body:not(.module-started-v760) #cancel-edit-btn,
+body:not(.module-started-v760) #select-polygon-btn {
+  display: none !important;
+}
+
+/* Save button at bottom only after module starts */
+body.module-started-v760 #save-entry-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 3.1rem !important;
+  margin-top: .75rem !important;
+  border-radius: 14px !important;
+  background: #1f7a3a !important;
+  color: #fff !important;
+  font-weight: 900 !important;
+}
+
+body.module-started-v760 #remove-shape-btn,
+body.module-started-v760 #cancel-edit-btn,
+body.module-started-v760 #select-polygon-btn {
+  display: none !important;
+}
+
+/* Offline & Basemaps collapsed until clicked */
+#sidebar .section.offline-final-v760:not(.offline-open) > *:not(h2) {
+  display: none !important;
+}
+
+#sidebar .section.offline-final-v760 > h2 {
+  cursor: pointer !important;
+}
+
+@media(max-width:540px){
+  #start-crop-survey-v760,
+  #start-livestock-survey-v760{
+    min-height: 3.55rem !important;
+  }
+}
+

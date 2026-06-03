@@ -1,0 +1,48 @@
+
+/* SECOND PLOT HELPER v620 */
+.second-plot-helper{
+  margin:.85rem 0;
+  border:1px solid #d9ead9;
+  border-radius:18px;
+  background:#fff;
+  box-shadow:0 10px 26px rgba(20,83,45,.10);
+  overflow:hidden;
+}
+.second-plot-helper summary{
+  cursor:pointer;
+  padding:1rem;
+  color:#14532d;
+  font-weight:900;
+  background:#fbfefb;
+}
+.second-plot-helper-body{
+  padding:1rem;
+  color:#657565;
+  font-size:.92rem;
+  line-height:1.4;
+}
+.second-plot-helper-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.65rem;
+  margin-top:.8rem;
+}
+.second-plot-helper-actions button{
+  border:0;
+  border-radius:13px;
+  min-height:2.75rem;
+  font-weight:850;
+  cursor:pointer;
+}
+#use-previous-farmer-btn{
+  background:#1f7a3a;
+  color:#fff;
+}
+#clear-previous-farmer-btn{
+  background:#edf7ee;
+  color:#14532d;
+  border:1px solid #d9ead9;
+}
+@media(max-width:540px){
+  .second-plot-helper-actions{grid-template-columns:1fr;}
+}

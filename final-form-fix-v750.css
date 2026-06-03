@@ -1,0 +1,202 @@
+
+
+/* ============================================================
+   FINAL FORM DISPLAY FIX v750
+   Removes conflicting helper UI and forces the actual form to show.
+   ============================================================ */
+
+#collector-quick-menu,
+.quick-menu-note,
+.quick-menu-description,
+.quick-menu-helper,
+#required-progress,
+#completion-status,
+#next-questions,
+#quality-score,
+#wizard-progress,
+#collector-progress,
+#form-progress,
+.progress-card,
+.form-progress,
+.setup-progress,
+.question-progress,
+.step-progress,
+.quality-card,
+.quality-score-card,
+#crop-form .step-label,
+#crop-form .step-summary,
+#crop-form .setup-step,
+#crop-form .question-step,
+#crop-form .status:not(.error):not(.warning),
+#save-flow-card,
+.save-flow-card,
+#geometry-edit-status,
+.save-action-stack,
+#save-action-stack {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Hide advanced collector sections that crowd the form */
+#collector-settings-section,
+#sidebar .section.final-hide-in-collector,
+#sidebar .section.final-hide-entries,
+#sidebar .section.final-hide-sync,
+#sidebar .section:has(> h2) h2 {
+  line-height: 1.2 !important;
+}
+
+/* Make the actual collector form visible */
+#collect-form,
+#crop-form {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+#crop-form {
+  padding-bottom: 1rem !important;
+}
+
+/* Show real input questions */
+#crop-form .input-group {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  max-height: none !important;
+  margin-bottom: .8rem !important;
+}
+
+/* Keep hidden technical location field hidden */
+#crop-form #location-group,
+#crop-form .input-group:has(input[type="hidden"]) {
+  display: none !important;
+}
+
+/* Keep actual fields readable */
+#crop-form input:not([type="hidden"]),
+#crop-form select,
+#crop-form textarea,
+#crop-form label {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+#crop-form input:not([type="hidden"]),
+#crop-form select,
+#crop-form textarea {
+  width: 100% !important;
+  min-height: 2.95rem !important;
+  border: 1px solid #cfe3cf !important;
+  border-radius: 14px !important;
+  background: #fff !important;
+  color: #1f2d1f !important;
+  font-size: .96rem !important;
+}
+
+/* Survey buttons: keep them only as clean module selectors */
+#collector-primary-modules {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: .75rem !important;
+  margin: .75rem 0 1rem !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  visibility: visible !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+#start-crop-survey,
+#start-livestock-survey,
+[data-action="start-crop-survey"],
+[data-action="start-livestock-survey"] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 3.45rem !important;
+  border: 0 !important;
+  border-radius: 16px !important;
+  color: #fff !important;
+  font-weight: 900 !important;
+  font-size: 1rem !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+#start-crop-survey,
+[data-action="start-crop-survey"] {
+  background: #1f7a3a !important;
+}
+
+#start-livestock-survey,
+[data-action="start-livestock-survey"] {
+  background: #78909c !important;
+}
+
+/* Original save buttons belong at the bottom of the real form */
+#save-entry-btn,
+#remove-shape-btn,
+#cancel-edit-btn,
+#select-polygon-btn {
+  width: 100% !important;
+  min-height: 3.05rem !important;
+  border-radius: 14px !important;
+  margin-top: .65rem !important;
+  font-weight: 900 !important;
+}
+
+#save-entry-btn {
+  display: flex !important;
+  background: #1f7a3a !important;
+  color: #fff !important;
+}
+
+#remove-shape-btn,
+#cancel-edit-btn,
+#select-polygon-btn {
+  display: none !important;
+}
+
+/* Offline & Basemaps collapsed, only opens when clicked */
+#sidebar .section.final-offline-map-section:not(.offline-open) > *:not(h2) {
+  display: none !important;
+}
+
+#sidebar .section.final-offline-map-section > h2 {
+  cursor: pointer !important;
+}
+
+/* Hide Entries, Operations, Field Readiness, and Settings from collector screen */
+#sidebar .section.final-hide-entries,
+#sidebar .section.final-hide-sync,
+#sidebar .section.final-hide-in-collector {
+  display: none !important;
+}
+
+@media (max-width: 540px) {
+  #crop-form .input-group {
+    margin-bottom: .75rem !important;
+  }
+
+  #start-crop-survey,
+  #start-livestock-survey {
+    min-height: 3.55rem !important;
+  }
+}
+

@@ -1,0 +1,1118 @@
+
+/* ============================================================
+   COLLECTOR FINAL LAYOUT v1
+   Architecture:
+   - Desktop: Map left, form right.
+   - Mobile/tablet: Map top, form below.
+   - Advanced collector tools hidden from collector display.
+   - Original form questions and drawing tools remain unchanged.
+   ============================================================ */
+
+:root{
+  --cf-green:#1f7a3a;
+  --cf-green-dark:#14532d;
+  --cf-green-soft:#edf7ee;
+  --cf-bg:#f6faf6;
+  --cf-panel:#ffffff;
+  --cf-border:#d9ead9;
+  --cf-text:#1f2d1f;
+  --cf-muted:#667766;
+  --cf-shadow:0 12px 30px rgba(20,83,45,.12);
+  --cf-radius:18px;
+  --cf-header:64px;
+}
+
+/* Base */
+body.collector-final-layout{
+  background:var(--cf-bg) !important;
+  color:var(--cf-text);
+}
+
+/* Header */
+body.collector-final-layout #app > header{
+  min-height:var(--cf-header);
+  padding:.65rem 1rem !important;
+  background:linear-gradient(135deg,var(--cf-green-dark),var(--cf-green)) !important;
+  box-shadow:0 8px 22px rgba(20,83,45,.22);
+  z-index:900;
+}
+
+body.collector-final-layout #app > header h1{
+  margin:0;
+  font-size:1.1rem !important;
+  line-height:1.05;
+}
+
+body.collector-final-layout #app > header p{
+  font-size:.78rem !important;
+  opacity:.88;
+}
+
+body.collector-final-layout .header-user{
+  gap:.5rem !important;
+  flex-wrap:wrap;
+}
+
+body.collector-final-layout .user-info,
+body.collector-final-layout #admin-link,
+body.collector-final-layout #logout-btn,
+body.collector-final-layout .theme-toggle{
+  border-radius:999px !important;
+  min-height:2.25rem !important;
+}
+
+/* Hide advanced/non-field-collection sections */
+body.collector-final-layout #sidebar .section.final-hidden-section{
+  display:none !important;
+}
+
+/* Desktop: map left, compact form right */
+@media (min-width:1000px){
+  body.collector-final-layout #main{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) minmax(340px,390px) !important;
+    height:calc(100vh - var(--cf-header)) !important;
+    overflow:hidden !important;
+  }
+
+  body.collector-final-layout #map-container{
+    height:100% !important;
+    min-width:0 !important;
+  }
+
+  body.collector-final-layout #map{
+    height:100% !important;
+    width:100% !important;
+  }
+
+  body.collector-final-layout #sidebar{
+    width:100% !important;
+    max-width:none !important;
+    height:100% !important;
+    overflow-y:auto !important;
+    padding:.75rem !important;
+    background:linear-gradient(180deg,#f7fbf7,#edf6ed) !important;
+    border-left:1px solid rgba(20,83,45,.12);
+  }
+}
+
+/* Mobile/tablet: map first, form below; enough drawing space */
+@media (max-width:999px){
+  body.collector-final-layout{
+    overflow:auto !important;
+  }
+
+  body.collector-final-layout #app > header{
+    position:sticky !important;
+    top:0;
+    min-height:56px !important;
+    padding:.5rem .7rem !important;
+  }
+
+  body.collector-final-layout #app > header h1{
+    font-size:1rem !important;
+  }
+
+  body.collector-final-layout #app > header p{
+    display:none !important;
+  }
+
+  body.collector-final-layout #main{
+    display:flex !important;
+    flex-direction:column !important;
+    height:auto !important;
+    min-height:100vh !important;
+    overflow:visible !important;
+  }
+
+  body.collector-final-layout #map-container{
+    order:1;
+    position:relative !important;
+    width:100% !important;
+    height:74dvh !important;
+    min-height:430px !important;
+    max-height:780px !important;
+    border-bottom:1px solid rgba(20,83,45,.14);
+  }
+
+  body.collector-final-layout #map{
+    height:100% !important;
+    width:100% !important;
+  }
+
+  body.collector-final-layout #sidebar{
+    order:2;
+    position:relative !important;
+    width:100% !important;
+    max-width:100% !important;
+    height:auto !important;
+    max-height:none !important;
+    overflow:visible !important;
+    padding:.7rem !important;
+    background:var(--cf-bg) !important;
+  }
+
+  body.collector-final-layout .mobile-menu-toggle{
+    display:none !important;
+  }
+
+  body.collector-final-layout .basemap-selector{
+    top:.7rem !important;
+    right:.7rem !important;
+    max-width:58vw !important;
+    border-radius:14px !important;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+  }
+
+  body.collector-final-layout .map-workflow-banner{
+    display:none !important;
+  }
+}
+
+/* Small phones */
+@media (max-width:540px){
+  :root{
+    --cf-header:54px;
+  }
+
+  body.collector-final-layout #app > header{
+    min-height:54px !important;
+  }
+
+  body.collector-final-layout #app > header h1{
+    font-size:.96rem !important;
+  }
+
+  body.collector-final-layout #app > header > div:first-child{
+    max-width:125px;
+  }
+
+  body.collector-final-layout .header-user{
+    gap:.25rem !important;
+  }
+
+  body.collector-final-layout .user-info,
+  body.collector-final-layout #admin-link,
+  body.collector-final-layout #logout-btn,
+  body.collector-final-layout .theme-toggle{
+    min-height:2rem !important;
+    padding:.32rem .48rem !important;
+    font-size:.75rem;
+  }
+
+  body.collector-final-layout #admin-link{
+    display:none !important;
+  }
+
+  body.collector-final-layout #map-container{
+    height:76dvh !important;
+    min-height:420px !important;
+  }
+
+  body.collector-final-layout .basemap-selector{
+    transform:scale(.88);
+    transform-origin:top right;
+    max-width:64vw !important;
+  }
+}
+
+/* Form panel/cards */
+body.collector-final-layout #sidebar .section{
+  background:var(--cf-panel) !important;
+  border:1px solid var(--cf-border) !important;
+  border-radius:var(--cf-radius) !important;
+  box-shadow:var(--cf-shadow) !important;
+  margin-bottom:.75rem !important;
+  overflow:hidden !important;
+}
+
+body.collector-final-layout #sidebar .section > h2{
+  min-height:3rem !important;
+  padding:.65rem .85rem !important;
+  margin:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:.6rem !important;
+  color:var(--cf-green-dark) !important;
+  font-size:1rem !important;
+  font-weight:800 !important;
+}
+
+body.collector-final-layout #sidebar .section > h2 svg{
+  width:1.2rem !important;
+  height:1.2rem !important;
+}
+
+/* Keep only field collection/validation content readable */
+body.collector-final-layout #collect-form{
+  padding:.15rem .2rem .4rem;
+}
+
+body.collector-final-layout #crop-form{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:.62rem;
+}
+
+body.collector-final-layout .input-group{
+  margin-bottom:.22rem !important;
+}
+
+body.collector-final-layout .input-group input,
+body.collector-final-layout .input-group select,
+body.collector-final-layout .input-group textarea{
+  min-height:2.8rem;
+  border-radius:13px !important;
+  border-color:#cfe3cf !important;
+  background:#fff !important;
+  color:var(--cf-text);
+}
+
+body.collector-final-layout .input-group label{
+  color:var(--cf-green-dark) !important;
+}
+
+body.collector-final-layout textarea{
+  min-height:4.2rem;
+}
+
+/* Buttons */
+body.collector-final-layout button{
+  border-radius:13px !important;
+  font-weight:800 !important;
+}
+
+body.collector-final-layout button:not(.secondary):not(.danger):not(.warning),
+body.collector-final-layout #save-entry-btn{
+  background:var(--cf-green) !important;
+}
+
+body.collector-final-layout .secondary{
+  background:#78909c !important;
+  color:#fff !important;
+}
+
+body.collector-final-layout .warning{
+  background:#f2994a !important;
+  color:#fff !important;
+}
+
+body.collector-final-layout .danger{
+  background:#d64545 !important;
+}
+
+body.collector-final-layout #save-entry-btn{
+  width:100%;
+  min-height:3.15rem;
+}
+
+/* Mode toggle */
+body.collector-final-layout .mode-toggle{
+  background:var(--cf-green-soft) !important;
+  border:1px solid var(--cf-border);
+  border-radius:15px !important;
+  padding:.28rem !important;
+  gap:.25rem !important;
+}
+
+body.collector-final-layout .mode-toggle button{
+  min-height:2.7rem !important;
+  background:transparent !important;
+  color:var(--cf-green-dark) !important;
+}
+
+body.collector-final-layout .mode-toggle button.active{
+  background:var(--cf-green) !important;
+  color:#fff !important;
+}
+
+/* Drawing tools: original Leaflet toolbar retained */
+body.collector-final-layout .leaflet-control-zoom a,
+body.collector-final-layout .leaflet-draw-toolbar a{
+  width:39px !important;
+  height:39px !important;
+  line-height:39px !important;
+}
+
+@media (max-width:999px){
+  body.collector-final-layout .leaflet-control-container .leaflet-top{
+    top:.7rem !important;
+  }
+
+  body.collector-final-layout .leaflet-draw{
+    margin-top:4.5rem !important;
+  }
+
+  body.collector-final-layout .leaflet-control-zoom{
+    margin-top:.7rem !important;
+  }
+}
+
+@media (max-width:540px){
+  body.collector-final-layout .leaflet-control-zoom a,
+  body.collector-final-layout .leaflet-draw-toolbar a{
+    width:37px !important;
+    height:37px !important;
+    line-height:37px !important;
+  }
+
+  body.collector-final-layout .leaflet-draw{
+    margin-top:4.1rem !important;
+  }
+}
+
+/* Hide empty messages */
+body.collector-final-layout #collector-feedback[hidden],
+body.collector-final-layout #collector-feedback:empty,
+body.collector-final-layout #collector-feedback .collector-feedback-message:empty,
+body.collector-final-layout .status:empty{
+  display:none !important;
+}
+
+
+
+/* ============================================================
+   MBTILES / OFFLINE MAP ACCESS PATCH
+   Keeps MBTiles upload available without overwhelming collector UI.
+   ============================================================ */
+
+body.collector-final-layout #sidebar .section.final-offline-map-section{
+  display:block !important;
+  background:#f9fcf9 !important;
+  border:1px dashed #b8d8b8 !important;
+  box-shadow:none !important;
+}
+
+body.collector-final-layout #sidebar .section.final-offline-map-section > h2{
+  min-height:2.8rem !important;
+  font-size:.95rem !important;
+  color:#14532d !important;
+}
+
+body.collector-final-layout #sidebar .section.final-offline-map-section::before{
+  content:"Offline map / MBTiles";
+  display:block;
+  padding:.65rem .85rem 0;
+  color:#667766;
+  font-size:.78rem;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+
+body.collector-final-layout #sidebar .section.final-offline-map-section .status,
+body.collector-final-layout #sidebar .section.final-offline-map-section p{
+  font-size:.86rem !important;
+}
+
+body.collector-final-layout #sidebar .section.final-offline-map-section button,
+body.collector-final-layout #sidebar .section.final-offline-map-section input,
+body.collector-final-layout #sidebar .section.final-offline-map-section select{
+  min-height:2.6rem !important;
+}
+
+/* On mobile it stays below the form, not over the map */
+@media (max-width:999px){
+  body.collector-final-layout #sidebar .section.final-offline-map-section{
+    margin-top:.7rem !important;
+  }
+}
+
+
+
+/* ============================================================
+   FINAL POLISH PATCH v210
+   Keeps MBTiles visible, removes collector clutter, preserves form questions.
+   ============================================================ */
+
+/* Make MBTiles/offline section compact but clearly accessible */
+body.collector-final-layout #sidebar .section.final-offline-map-section{
+  display:block !important;
+  order:99;
+}
+
+body.collector-final-layout #sidebar .section.final-offline-map-section > *:not(h2){
+  padding-left:.85rem !important;
+  padding-right:.85rem !important;
+}
+
+body.collector-final-layout #sidebar .section.final-offline-map-section button{
+  width:100%;
+  margin:.25rem 0;
+}
+
+/* Keep visible collector workflow calm */
+body.collector-final-layout #collect-form-heading{
+  color:var(--cf-green-dark) !important;
+  font-size:1.04rem !important;
+  margin:.75rem 0 .45rem !important;
+}
+
+/* Reduce intimidating progress text visually without removing it */
+body.collector-final-layout [id*="progress"],
+body.collector-final-layout [class*="progress"],
+body.collector-final-layout [id*="score"],
+body.collector-final-layout [class*="score"]{
+  font-size:.82rem !important;
+}
+
+/* Make wizard cards less overwhelming */
+body.collector-final-layout .wizard-step,
+body.collector-final-layout .wizard-card,
+body.collector-final-layout [class*="wizard"],
+body.collector-final-layout [class*="step-card"]{
+  border-radius:14px !important;
+}
+
+/* Desktop: preserve map dominance */
+@media (min-width:1000px){
+  body.collector-final-layout #main{
+    grid-template-columns:minmax(0,1fr) minmax(335px,385px) !important;
+  }
+}
+
+/* Mobile: ensure drawing space remains strong */
+@media (max-width:999px){
+  body.collector-final-layout #map-container{
+    height:75dvh !important;
+  }
+
+  body.collector-final-layout #sidebar{
+    padding:.65rem !important;
+  }
+}
+
+@media (max-width:540px){
+  body.collector-final-layout #map-container{
+    height:76dvh !important;
+    min-height:430px !important;
+  }
+}
+
+
+
+/* ============================================================
+   FINAL MOBILE CLEANUP PATCH v220
+   Fixes:
+   - Removes bottom quick buttons/nav from mobile collector display.
+   - Reduces mobile map height so the form appears sooner.
+   - Simplifies small-phone header.
+   - Keeps MBTiles visible below the form.
+   - Keeps original Leaflet draw tools.
+   - Field questions unchanged.
+   ============================================================ */
+
+/* Remove unwanted bottom/quick menu buttons from collector display */
+body.collector-final-layout #phase6-bottom-nav,
+body.collector-final-layout .phase6-bottom-nav,
+body.collector-final-layout #phase6-map-actions,
+body.collector-final-layout .phase6-map-actions,
+body.collector-final-layout #phase6-mobile-status,
+body.collector-final-layout .phase6-mobile-status,
+body.collector-final-layout .quick-menu,
+body.collector-final-layout #quick-menu,
+body.collector-final-layout [data-phase6-view],
+body.collector-final-layout [class*="bottom-nav"],
+body.collector-final-layout [id*="bottom-nav"]{
+  display:none !important;
+}
+
+/* Keep only the actual collection workflow and compact MBTiles. */
+body.collector-final-layout #sidebar .section.final-hidden-section{
+  display:none !important;
+}
+
+body.collector-final-layout #sidebar .section.final-offline-map-section{
+  display:block !important;
+  margin-top:.7rem !important;
+}
+
+/* Better desktop right panel proportions */
+@media (min-width:1000px){
+  body.collector-final-layout #main{
+    grid-template-columns:minmax(0,1fr) minmax(340px,400px) !important;
+  }
+
+  body.collector-final-layout #sidebar{
+    padding:.75rem !important;
+  }
+
+  body.collector-final-layout .start-survey-actions button,
+  body.collector-final-layout [id*="start-crop"],
+  body.collector-final-layout [id*="start-livestock"]{
+    font-size:.92rem !important;
+    line-height:1.15 !important;
+  }
+}
+
+/* Tablet portrait and large phones: map top, form below, map still large */
+@media (max-width:999px){
+  body.collector-final-layout #main{
+    display:flex !important;
+    flex-direction:column !important;
+    height:auto !important;
+    min-height:100dvh !important;
+    overflow:visible !important;
+  }
+
+  body.collector-final-layout #map-container{
+    order:1;
+    height:68dvh !important;
+    min-height:390px !important;
+    max-height:650px !important;
+  }
+
+  body.collector-final-layout #sidebar{
+    order:2;
+    padding:.65rem !important;
+  }
+
+  body.collector-final-layout .leaflet-control-container .leaflet-top{
+    top:.6rem !important;
+  }
+
+  body.collector-final-layout .leaflet-draw{
+    margin-top:4.25rem !important;
+  }
+
+  body.collector-final-layout .basemap-selector{
+    top:.6rem !important;
+    right:.6rem !important;
+    max-width:58vw !important;
+  }
+}
+
+/* Small phones: make the form visible sooner */
+@media (max-width:540px){
+  body.collector-final-layout #map-container{
+    height:61dvh !important;
+    min-height:350px !important;
+    max-height:520px !important;
+  }
+
+  body.collector-final-layout #sidebar{
+    padding:.6rem !important;
+  }
+
+  body.collector-final-layout #app > header{
+    min-height:52px !important;
+    padding:.45rem .6rem !important;
+  }
+
+  body.collector-final-layout #app > header h1{
+    font-size:.92rem !important;
+  }
+
+  body.collector-final-layout #app > header p{
+    display:none !important;
+  }
+
+  body.collector-final-layout #admin-link{
+    display:none !important;
+  }
+
+  body.collector-final-layout .user-info span{
+    max-width:75px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+
+  body.collector-final-layout #logout-btn span,
+  body.collector-final-layout #logout-btn .button-label{
+    display:none !important;
+  }
+
+  body.collector-final-layout .leaflet-control-zoom a,
+  body.collector-final-layout .leaflet-draw-toolbar a{
+    width:36px !important;
+    height:36px !important;
+    line-height:36px !important;
+  }
+
+  body.collector-final-layout .leaflet-draw{
+    margin-top:3.95rem !important;
+  }
+
+  body.collector-final-layout .basemap-selector{
+    transform:scale(.85);
+    transform-origin:top right;
+    max-width:66vw !important;
+  }
+
+  body.collector-final-layout .start-survey-actions,
+  body.collector-final-layout .button-group{
+    gap:.55rem !important;
+  }
+
+  body.collector-final-layout .start-survey-actions button,
+  body.collector-final-layout [id*="start-crop"],
+  body.collector-final-layout [id*="start-livestock"]{
+    font-size:.86rem !important;
+    line-height:1.1 !important;
+    min-height:3rem !important;
+  }
+}
+
+/* Very small devices such as iPhone SE */
+@media (max-width:390px){
+  body.collector-final-layout #map-container{
+    height:58dvh !important;
+    min-height:330px !important;
+  }
+
+  body.collector-final-layout #sidebar .section > h2{
+    min-height:2.75rem !important;
+    font-size:.94rem !important;
+  }
+
+  body.collector-final-layout .input-group input,
+  body.collector-final-layout .input-group select,
+  body.collector-final-layout .input-group textarea{
+    min-height:2.6rem !important;
+  }
+}
+
+/* Compact MBTiles section */
+body.collector-final-layout #sidebar .section.final-offline-map-section{
+  background:#fbfdfb !important;
+  border:1px dashed #b8d8b8 !important;
+  box-shadow:none !important;
+}
+
+body.collector-final-layout #sidebar .section.final-offline-map-section > h2{
+  min-height:2.75rem !important;
+  font-size:.94rem !important;
+}
+
+body.collector-final-layout #sidebar .section.final-offline-map-section button,
+body.collector-final-layout #sidebar .section.final-offline-map-section input,
+body.collector-final-layout #sidebar .section.final-offline-map-section select{
+  min-height:2.55rem !important;
+}
+
+/* Hide empty/blank feedback blocks */
+body.collector-final-layout #collector-feedback[hidden],
+body.collector-final-layout #collector-feedback:empty,
+body.collector-final-layout #collector-feedback .collector-feedback-message:empty,
+body.collector-final-layout .status:empty{
+  display:none !important;
+}
+
+
+
+/* FINAL RUNTIME COMPATIBILITY PATCH v230 */
+body.collector-final-layout.collector-sidebar-minimized #sidebar{
+  display:block !important;
+}
+
+@media (max-width:999px){
+  body.collector-final-layout.collector-sidebar-minimized #sidebar{
+    transform:none !important;
+  }
+}
+
+/* ============================================================
+   CLEAN PRODUCTION COLLECTOR DISPLAY v660
+   Purpose:
+   - Hide long helper/progress statements that overcrowd mobile UI.
+   - Keep actual form questions, inputs, Back/Next, Save, map tools.
+   - Keep error/warning feedback visible.
+   ============================================================ */
+
+/* Remove Quick Menu explanatory text:
+   "Main collection tools stay up front..." */
+#collector-quick-menu .quick-menu-note,
+.quick-menu-note,
+.quick-menu-description,
+.quick-menu-helper,
+#quick-menu .description,
+#quick-menu .status,
+#collector-quick-menu p,
+#collector-quick-menu small{
+  display:none !important;
+}
+
+/* Hide questionnaire/progress cards:
+   "7/39 required answers complete", "Needs Work", "Up next..." */
+#collector-questionnaire-progress,
+.questionnaire-progress,
+.questionnaire-progress-title,
+.questionnaire-progress-meta,
+#required-progress,
+#completion-status,
+#next-questions,
+#form-progress,
+#collector-progress,
+#wizard-progress,
+.form-progress,
+.setup-progress,
+.question-progress,
+.step-progress,
+.progress-card,
+.quality-card,
+.quality-score-card,
+#quality-score,
+[id*="questionnaire-progress"],
+[class*="questionnaire-progress"]{
+  display:none !important;
+}
+
+/* Hide setup step labels:
+   "Setup Step 2 of 41: Crop Type" */
+#collector-odk-step-label,
+#crop-form .step-label,
+#crop-form .step-summary,
+#crop-form .setup-step,
+#crop-form .question-step,
+#crop-form [class*="step-label"],
+#crop-form [class*="step-summary"],
+#crop-form [id*="step-label"],
+#crop-form [id*="step-summary"]{
+  display:none !important;
+}
+
+/* Hide only informational collector feedback; keep warnings/errors visible */
+#collector-feedback:not(.error):not(.warning),
+.collector-feedback:not(.error):not(.warning){
+  display:none !important;
+}
+
+/* Keep warning/error feedback compact when it appears */
+#collector-feedback.warning,
+#collector-feedback.error,
+.collector-feedback.warning,
+.collector-feedback.error{
+  margin:.35rem 0 .65rem !important;
+  padding:.65rem .75rem !important;
+  border-radius:12px !important;
+  font-size:.86rem !important;
+  line-height:1.35 !important;
+}
+
+/* Remove empty visual gaps left by hidden helper/status blocks */
+#collect-form,
+#crop-form,
+#validate-form{
+  gap:.62rem !important;
+}
+
+#crop-form > .status:not(.warning):not(.error),
+#collect-form > .status:not(.warning):not(.error),
+.status.info:not(.warning):not(.error),
+.status.success:not(.warning):not(.error){
+  display:none !important;
+}
+
+/* Make the active question area feel like one clean card */
+body.mobile-big-map-ready #crop-form,
+body.collector-final-layout #crop-form{
+  margin-top:.35rem !important;
+}
+
+body.mobile-big-map-ready #crop-form .input-group,
+body.collector-final-layout #crop-form .input-group{
+  margin-bottom:.35rem !important;
+}
+
+/* Keep Second Plot helper visible but compact */
+.second-plot-helper{
+  margin-top:.7rem !important;
+}
+
+.second-plot-helper summary{
+  min-height:2.75rem !important;
+  padding:.65rem .85rem !important;
+}
+
+/* Mobile: tighten vertical spacing after hiding clutter */
+@media (max-width:999px){
+  #sidebar .section{
+    margin-bottom:.7rem !important;
+  }
+
+  #collect-form,
+  #validate-form{
+    padding:.2rem .65rem .75rem !important;
+  }
+
+  #crop-form{
+    gap:.55rem !important;
+  }
+}
+
+
+/* ============================================================
+   CLEAN COLLECTOR DISPLAY PATCH v670
+   Purpose:
+   - Restore Crop Survey and Livestock Survey start buttons.
+   - Hide advanced sections from normal collector view.
+   - Keep Offline & Basemaps as one collapsed, compact section.
+   - Do not change field questions or map/drawing logic.
+   ============================================================ */
+
+/* 1) Do not hide the Start Survey area or its buttons */
+#collect-form,
+#crop-form,
+#collector-primary-modules,
+#start-crop-survey,
+#start-livestock-survey,
+button#start-crop-survey,
+button#start-livestock-survey,
+[data-action="start-crop-survey"],
+[data-action="start-livestock-survey"]{
+  display: revert !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* Keep crop/livestock buttons stacked and readable */
+#collector-primary-modules{
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: .75rem !important;
+  margin: .75rem 0 !important;
+}
+
+#collector-primary-modules button,
+#start-crop-survey,
+#start-livestock-survey,
+[data-action="start-crop-survey"],
+[data-action="start-livestock-survey"]{
+  width: 100% !important;
+  min-height: 3.5rem !important;
+  border-radius: 16px !important;
+  font-weight: 900 !important;
+  font-size: 1rem !important;
+  text-align: center !important;
+  justify-content: center !important;
+  display: flex !important;
+}
+
+/* 2) Hide non-essential collector dashboard blocks from normal field collection view */
+body.collector-final-layout #sidebar .section:has(> h2),
+body.mobile-big-map-ready #sidebar .section:has(> h2){
+  overflow: hidden !important;
+}
+
+/* Advanced cards should not crowd the collector form */
+body.collector-final-layout #sidebar .section:has(> h2) > h2,
+body.mobile-big-map-ready #sidebar .section:has(> h2) > h2{
+  cursor: pointer !important;
+}
+
+/* Hide Settings, Entries, Operations and Field Readiness sections from collector display */
+body.collector-final-layout #sidebar .section:has(> h2) h2,
+body.mobile-big-map-ready #sidebar .section:has(> h2) h2{
+  line-height: 1.2 !important;
+}
+
+/* Browser support fallback uses JS class added below */
+#sidebar .section.final-hide-in-collector,
+#sidebar .section.final-hidden-section:not(.final-offline-map-section){
+  display: none !important;
+}
+
+/* 3) Offline & Basemaps: show only as compact collapsible section */
+#sidebar .section.final-offline-map-section{
+  display: block !important;
+  background: #ffffff !important;
+  border: 1px solid #d9ead9 !important;
+  border-radius: 18px !important;
+  box-shadow: 0 10px 24px rgba(20,83,45,.08) !important;
+  margin: .75rem 0 !important;
+  overflow: hidden !important;
+}
+
+#sidebar .section.final-offline-map-section > h2{
+  min-height: 3.1rem !important;
+  padding: .8rem .95rem !important;
+  margin: 0 !important;
+  font-size: 1rem !important;
+  font-weight: 900 !important;
+  color: #14532d !important;
+}
+
+/* Collapsed offline section: hide MBTiles chooser and details by default */
+#sidebar .section.final-offline-map-section:not(.offline-open) > *:not(h2){
+  display: none !important;
+}
+
+/* Opened offline section: display content neatly */
+#sidebar .section.final-offline-map-section.offline-open > *:not(h2){
+  display: block !important;
+  padding-left: .9rem !important;
+  padding-right: .9rem !important;
+}
+
+#sidebar .section.final-offline-map-section.offline-open{
+  padding-bottom: .85rem !important;
+}
+
+#sidebar .section.final-offline-map-section .odk-file-fallback,
+#sidebar .section.final-offline-map-section [class*="file"],
+#sidebar .section.final-offline-map-section input[type="file"]{
+  max-width: 100% !important;
+}
+
+/* Remove the duplicate pseudo heading "Offline map / MBTiles" from earlier patches */
+body.collector-final-layout #sidebar .section.final-offline-map-section::before{
+  content: none !important;
+  display: none !important;
+}
+
+/* 4) Hide the UI text that was overcrowding the display */
+.quick-menu-note,
+#collector-quick-menu .quick-menu-note,
+#collector-quick-menu p,
+#collector-quick-menu .status,
+#collector-primary-modules.status,
+#collector-feedback:not(.error):not(.warning),
+.collector-feedback:not(.error):not(.warning),
+#crop-form .step-summary,
+#crop-form .step-label,
+#crop-form .setup-step,
+#crop-form .question-step,
+#required-progress,
+#completion-status,
+#next-questions,
+#quality-score,
+.progress-card,
+.form-progress,
+.question-progress,
+.step-progress,
+.quality-score-card{
+  display: none !important;
+}
+
+/* Keep real errors/warnings visible */
+#collector-feedback.error,
+#collector-feedback.warning,
+.collector-feedback.error,
+.collector-feedback.warning{
+  display: flex !important;
+}
+
+/* 5) Reduce empty space after hidden blocks */
+#sidebar,
+#collect-form,
+#crop-form{
+  gap: .65rem !important;
+}
+
+#crop-form:empty,
+#collector-primary-modules:empty{
+  display: none !important;
+}
+
+@media (max-width: 540px){
+  #collector-primary-modules button,
+  #start-crop-survey,
+  #start-livestock-survey{
+    min-height: 3.7rem !important;
+    font-size: .98rem !important;
+  }
+
+  #sidebar .section.final-offline-map-section > h2{
+    min-height: 3rem !important;
+  }
+}
+
+
+/* ============================================================
+   REMOVE COLLECTOR STATUS/HELPER TEXT v680
+   Removes:
+   - Main collection tools stay up front...
+   - 7/39 required answers complete...
+   - Needs Work...
+   - Up next...
+   - Setup Step...
+   Keeps actual form fields and Crop/Livestock buttons.
+   ============================================================ */
+
+/* Quick Menu helper sentence */
+#collector-quick-menu .quick-menu-note,
+#collector-quick-menu p,
+#collector-quick-menu .status,
+.quick-menu-note,
+.quick-menu-description,
+.quick-menu-helper {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  visibility: hidden !important;
+}
+
+/* Progress/quality cards */
+#required-progress,
+#completion-status,
+#next-questions,
+#quality-score,
+#wizard-progress,
+#collector-progress,
+#form-progress,
+.progress-card,
+.form-progress,
+.setup-progress,
+.question-progress,
+.step-progress,
+.quality-card,
+.quality-score-card,
+[class*="progress-card"],
+[class*="quality-score"] {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  visibility: hidden !important;
+}
+
+/* Setup step status text */
+#crop-form .status,
+#crop-form .step-label,
+#crop-form .step-summary,
+#crop-form .setup-step,
+#crop-form .question-step,
+#crop-form [id*="step"],
+#crop-form [class*="step-summary"],
+#crop-form [class*="step-label"] {
+  display: none !important;
+}
+
+/* Keep actual input groups visible even if they have step-related names */
+#crop-form .input-group,
+#crop-form input,
+#crop-form select,
+#crop-form textarea,
+#crop-form button {
+  display: revert !important;
+  visibility: visible !important;
+}
+
+/* Keep Back/Next buttons visible */
+#crop-form .button-group,
+#crop-form .button-group button,
+#crop-form button[type="button"],
+#crop-form button {
+  visibility: visible !important;
+}
+
+/* Remove empty blank cards/spaces caused by hidden status text */
+#sidebar .section:empty,
+#collect-form .status:empty,
+#crop-form .status:empty {
+  display: none !important;
+}
+
+#collect-form,
+#crop-form {
+  gap: .55rem !important;
+}

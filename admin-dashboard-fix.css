@@ -1,0 +1,481 @@
+
+/* ============================================================
+   ADMIN DASHBOARD FULL CORRECT FIX v510
+   This file only improves display and navigation reliability.
+   It does not remove dashboard modules or replace your system.
+   ============================================================ */
+
+:root{
+  --admin-green:#1f7a3a;
+  --admin-dark:#14532d;
+  --admin-soft:#f6faf6;
+  --admin-card:#ffffff;
+  --admin-border:#d9ead9;
+  --admin-muted:#657565;
+  --admin-shadow:0 10px 26px rgba(20,83,45,.12);
+}
+
+html,body{
+  overflow-x:hidden !important;
+}
+
+body{
+  background:#f6faf6 !important;
+}
+
+/* Prevent ugly huge stretched cards */
+.dashboard-layout,
+.admin-layout,
+.admin-shell,
+.shell,
+main,
+.dashboard-content,
+.content,
+.panel-content{
+  max-width:100% !important;
+  min-width:0 !important;
+  overflow-x:hidden !important;
+}
+
+#summary-grid,
+section#summary-grid,
+.summary-grid,
+.stats-grid,
+.overview-grid,
+.kpi-grid,
+.metric-grid,
+.dashboard-stats,
+.cards-grid,
+[data-dashboard-view="overview"] .grid,
+.dashboard-view .grid{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr)) !important;
+  gap:1rem !important;
+  align-items:stretch !important;
+  width:100% !important;
+}
+
+/* Cards */
+.card,
+.stat-card,
+.kpi-card,
+.metric-card,
+.overview-card,
+.summary-card,
+.dashboard-card,
+.info-card{
+  min-width:0 !important;
+  min-height:92px !important;
+  height:auto !important;
+  max-height:none !important;
+  padding:.95rem 1rem !important;
+  border-radius:16px !important;
+  box-sizing:border-box !important;
+  overflow:hidden !important;
+  word-break:normal !important;
+  overflow-wrap:normal !important;
+  hyphens:none !important;
+}
+
+/* Card headings/labels */
+.card > strong:first-child,
+.stat-card > strong:first-child,
+.kpi-card > strong:first-child,
+.metric-card > strong:first-child,
+.overview-card > strong:first-child,
+.summary-card > strong:first-child,
+.dashboard-card > strong:first-child,
+.card label,
+.card .label,
+.stat-label,
+.metric-label,
+.kpi-label,
+.summary-label{
+  display:block !important;
+  color:#345134 !important;
+  font-size:.78rem !important;
+  line-height:1.25 !important;
+  font-weight:800 !important;
+  letter-spacing:.035em !important;
+  text-transform:uppercase !important;
+  margin:0 0 .45rem 0 !important;
+  white-space:normal !important;
+  word-break:normal !important;
+  overflow-wrap:normal !important;
+  hyphens:none !important;
+}
+
+/* Card values */
+.card span,
+.card .value,
+.card .metric-value,
+.card .system-metric,
+.stat-card span,
+.kpi-card span,
+.metric-card span,
+.overview-card span,
+.summary-card span,
+.dashboard-card span,
+.stat-value,
+.kpi-value,
+.metric-value,
+.summary-value,
+.system-metric{
+  max-width:100% !important;
+  color:#064e24 !important;
+  font-size:1.35rem !important;
+  line-height:1.22 !important;
+  font-weight:850 !important;
+  letter-spacing:0 !important;
+  text-transform:none !important;
+  white-space:normal !important;
+  word-break:normal !important;
+  overflow-wrap:anywhere !important;
+  hyphens:none !important;
+}
+
+/* Long system metrics such as PostGIS should be smaller */
+#admin-postgis,
+#admin-backend-version,
+#admin-frontend-version,
+#admin-api-status,
+#ops-postgis,
+#ops-server-version,
+.long-value,
+.system-metric{
+  font-size:1.02rem !important;
+  line-height:1.35 !important;
+}
+
+/* Do not let all strong tags become huge */
+.card strong,
+.dashboard-card strong,
+.stat-card strong,
+.kpi-card strong,
+.metric-card strong{
+  word-break:normal !important;
+  overflow-wrap:normal !important;
+  hyphens:none !important;
+}
+
+/* Views and panels */
+.dashboard-view[hidden],
+[data-dashboard-view][hidden],
+.admin-view[hidden],
+[data-view-panel][hidden]{
+  display:none !important;
+}
+
+.dashboard-view:not([hidden]),
+[data-dashboard-view]:not([hidden]),
+.admin-view:not([hidden]),
+[data-view-panel]:not([hidden]){
+  display:block;
+}
+
+details{
+  max-width:100% !important;
+  overflow:hidden !important;
+}
+
+details > summary{
+  cursor:pointer !important;
+}
+
+/* Navigation must remain clickable */
+[data-dashboard-target],
+[data-dashboard-nav],
+[data-view],
+.dashboard-menu button,
+.side-menu button,
+.admin-menu button,
+.dashboard-nav button,
+nav button{
+  pointer-events:auto !important;
+  cursor:pointer !important;
+}
+
+/* Tables */
+.table-wrap,
+.table-container,
+.records-table-wrap,
+.validation-table-wrap,
+.users-table-wrap,
+.surveys-table-wrap{
+  overflow-x:auto !important;
+  max-width:100% !important;
+}
+
+table{
+  width:100% !important;
+  border-collapse:collapse;
+}
+
+th,td{
+  word-break:normal !important;
+  overflow-wrap:anywhere !important;
+  max-width:280px;
+}
+
+/* Toolbar */
+.toolbar,
+.actions-bar,
+.top-actions,
+.dashboard-toolbar{
+  display:flex !important;
+  gap:.65rem !important;
+  flex-wrap:wrap !important;
+  align-items:center !important;
+}
+
+button{
+  border-radius:12px !important;
+  white-space:nowrap !important;
+}
+
+/* Mobile */
+@media(max-width:1200px){
+  #summary-grid,
+  section#summary-grid,
+  .summary-grid,
+  .stats-grid,
+  .overview-grid,
+  .kpi-grid,
+  .metric-grid,
+  .dashboard-stats,
+  .cards-grid,
+  .dashboard-view .grid{
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr)) !important;
+  }
+}
+
+@media(max-width:700px){
+  #summary-grid,
+  section#summary-grid,
+  .summary-grid,
+  .stats-grid,
+  .overview-grid,
+  .kpi-grid,
+  .metric-grid,
+  .dashboard-stats,
+  .cards-grid,
+  .dashboard-view .grid{
+    grid-template-columns:1fr 1fr !important;
+    gap:.75rem !important;
+  }
+
+  .card,
+  .stat-card,
+  .kpi-card,
+  .metric-card,
+  .overview-card,
+  .summary-card,
+  .dashboard-card,
+  .info-card{
+    min-height:84px !important;
+    padding:.8rem !important;
+  }
+
+  .card span,
+  .card .value,
+  .card .metric-value,
+  .card .system-metric,
+  .stat-value,
+  .kpi-value,
+  .metric-value,
+  .summary-value{
+    font-size:1.18rem !important;
+  }
+}
+
+@media(max-width:430px){
+  #summary-grid,
+  section#summary-grid,
+  .summary-grid,
+  .stats-grid,
+  .overview-grid,
+  .kpi-grid,
+  .metric-grid,
+  .dashboard-stats,
+  .cards-grid,
+  .dashboard-view .grid{
+    grid-template-columns:1fr !important;
+  }
+}
+
+
+/* v520: structured admin tools for exports, sync and key workflows */
+.admin-feature-actions{
+  position:sticky;
+  top:0;
+  z-index:50;
+  display:flex;
+  flex-wrap:wrap;
+  gap:.6rem;
+  align-items:center;
+  justify-content:flex-end;
+  padding:.75rem 1rem;
+  background:linear-gradient(135deg,#f6faf6,#edf7ee);
+  border-bottom:1px solid #d9ead9;
+}
+
+.admin-feature-actions button,
+.admin-structured-features button{
+  background:#1f7a3a !important;
+  color:#fff !important;
+  border:0 !important;
+  border-radius:12px !important;
+  padding:.65rem .95rem !important;
+  font-weight:800 !important;
+  cursor:pointer !important;
+}
+
+.admin-structured-features{
+  margin:1rem !important;
+  max-width:100% !important;
+}
+
+.admin-structured-features details{
+  background:#fff !important;
+  border:1px solid #d9ead9 !important;
+  border-radius:18px !important;
+  box-shadow:0 10px 26px rgba(20,83,45,.10) !important;
+  margin-bottom:1rem !important;
+  overflow:hidden !important;
+}
+
+.admin-structured-features summary{
+  cursor:pointer !important;
+  color:#14532d !important;
+  font-weight:900 !important;
+  padding:1rem !important;
+  background:#fbfefb !important;
+}
+
+.admin-feature-grid{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr)) !important;
+  gap:1rem !important;
+  padding:1rem !important;
+}
+
+.admin-feature-grid article{
+  border:1px solid #d9ead9 !important;
+  border-radius:16px !important;
+  padding:1rem !important;
+  background:#f8fcf8 !important;
+}
+
+.admin-feature-grid h3{
+  margin:.1rem 0 .4rem !important;
+  color:#14532d !important;
+  font-size:1rem !important;
+}
+
+.admin-feature-grid p{
+  color:#657565 !important;
+  font-size:.9rem !important;
+  line-height:1.35 !important;
+  min-height:2.4rem;
+}
+
+
+/* v530: practical validation workflow panel */
+.admin-validation-workflow{
+  margin:1rem !important;
+  max-width:100% !important;
+}
+
+.admin-validation-workflow details{
+  background:#fff !important;
+  border:1px solid #d9ead9 !important;
+  border-radius:18px !important;
+  box-shadow:0 10px 26px rgba(20,83,45,.10) !important;
+  overflow:hidden !important;
+}
+
+.admin-validation-workflow summary{
+  cursor:pointer !important;
+  color:#14532d !important;
+  font-weight:900 !important;
+  padding:1rem !important;
+  background:#fbfefb !important;
+}
+
+.validation-workflow-grid{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr)) !important;
+  gap:1rem !important;
+  padding:1rem !important;
+}
+
+.validation-workflow-grid article{
+  border:1px solid #d9ead9 !important;
+  border-radius:16px !important;
+  background:#f8fcf8 !important;
+  padding:1rem !important;
+}
+
+.validation-workflow-grid h3{
+  margin:.1rem 0 .4rem !important;
+  color:#14532d !important;
+  font-size:1rem !important;
+}
+
+.validation-workflow-grid p{
+  margin:.3rem 0 .8rem !important;
+  color:#657565 !important;
+}
+
+.validation-table-wrap{
+  padding:0 1rem 1rem !important;
+  overflow-x:auto !important;
+}
+
+.validation-workflow-table{
+  width:100% !important;
+  border-collapse:collapse !important;
+  min-width:760px !important;
+}
+
+.validation-workflow-table th,
+.validation-workflow-table td{
+  border-bottom:1px solid #edf4ed !important;
+  padding:.7rem !important;
+  text-align:left !important;
+  vertical-align:top !important;
+  font-size:.9rem !important;
+  overflow-wrap:anywhere !important;
+}
+
+.validation-workflow-table th{
+  background:#f8fcf8 !important;
+  color:#345134 !important;
+  text-transform:uppercase !important;
+  font-size:.75rem !important;
+  letter-spacing:.04em !important;
+}
+
+.validation-actions{
+  display:flex !important;
+  gap:.4rem !important;
+  flex-wrap:wrap !important;
+}
+
+.validation-actions button{
+  padding:.45rem .65rem !important;
+  font-size:.8rem !important;
+}
+
+.validation-actions .approve{
+  background:#1f7a3a !important;
+}
+
+.validation-actions .correction{
+  background:#f59e0b !important;
+  color:#1f2937 !important;
+}
+
+.validation-actions .reject{
+  background:#dc2626 !important;
+}

@@ -1,0 +1,134 @@
+
+/* ADMIN OFFLINE SYNC + VALIDATION WORKFLOW v540 */
+.admin-offline-workflow{
+  margin:1rem !important;
+  max-width:100% !important;
+}
+
+.admin-offline-workflow details{
+  background:#fff !important;
+  border:1px solid #d9ead9 !important;
+  border-radius:18px !important;
+  box-shadow:0 10px 26px rgba(20,83,45,.10) !important;
+  overflow:hidden !important;
+  margin-bottom:1rem !important;
+}
+
+.admin-offline-workflow summary{
+  cursor:pointer !important;
+  padding:1rem !important;
+  background:#fbfefb !important;
+  color:#14532d !important;
+  font-weight:900 !important;
+}
+
+.admin-sync-grid{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr)) !important;
+  gap:1rem !important;
+  padding:1rem !important;
+}
+
+.admin-sync-card{
+  border:1px solid #d9ead9 !important;
+  border-radius:16px !important;
+  background:#f8fcf8 !important;
+  padding:1rem !important;
+}
+
+.admin-sync-card strong{
+  display:block !important;
+  color:#064e24 !important;
+  font-size:1.6rem !important;
+  line-height:1.1 !important;
+}
+
+.admin-sync-card span{
+  display:block !important;
+  color:#657565 !important;
+  font-size:.78rem !important;
+  font-weight:900 !important;
+  text-transform:uppercase !important;
+  margin-top:.4rem !important;
+}
+
+.admin-offline-actions{
+  display:flex !important;
+  gap:.65rem !important;
+  flex-wrap:wrap !important;
+  padding:0 1rem 1rem !important;
+}
+
+.admin-offline-actions button,
+.admin-validation-actions button{
+  border:0 !important;
+  border-radius:12px !important;
+  padding:.6rem .85rem !important;
+  font-weight:850 !important;
+  cursor:pointer !important;
+  background:#1f7a3a !important;
+  color:#fff !important;
+}
+
+.admin-validation-actions .correction{
+  background:#f59e0b !important;
+  color:#1f2937 !important;
+}
+
+.admin-validation-actions .reject{
+  background:#dc2626 !important;
+}
+
+.admin-validation-table-wrap{
+  overflow-x:auto !important;
+  padding:1rem !important;
+}
+
+.admin-validation-table{
+  width:100% !important;
+  min-width:820px !important;
+  border-collapse:collapse !important;
+}
+
+.admin-validation-table th,
+.admin-validation-table td{
+  border-bottom:1px solid #edf4ed !important;
+  padding:.7rem !important;
+  font-size:.9rem !important;
+  text-align:left !important;
+  vertical-align:top !important;
+  overflow-wrap:anywhere !important;
+}
+
+.admin-validation-table th{
+  background:#f8fcf8 !important;
+  color:#345134 !important;
+  text-transform:uppercase !important;
+  font-size:.75rem !important;
+  letter-spacing:.04em !important;
+}
+
+.admin-validation-actions{
+  display:flex !important;
+  gap:.4rem !important;
+  flex-wrap:wrap !important;
+}
+
+
+/* v610: backend-connected workflow status */
+.backend-action-message{
+  margin:0 1rem 1rem !important;
+  padding:.8rem 1rem !important;
+  border-radius:14px !important;
+  background:#edf7ee !important;
+  color:#14532d !important;
+  border:1px solid #d9ead9 !important;
+  font-size:.9rem !important;
+  line-height:1.35 !important;
+}
+
+.admin-offline-actions .secondary{
+  background:#edf7ee !important;
+  color:#14532d !important;
+  border:1px solid #d9ead9 !important;
+}

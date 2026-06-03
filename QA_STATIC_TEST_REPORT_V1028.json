@@ -1,0 +1,45 @@
+{
+  "syntax": [
+    [
+      "app-wizard.js",
+      true,
+      ""
+    ],
+    [
+      "app-db.js",
+      true,
+      ""
+    ],
+    [
+      "app-sync.js",
+      true,
+      ""
+    ],
+    [
+      "app-map.js",
+      true,
+      ""
+    ],
+    [
+      "collector-final-fixes.js",
+      true,
+      ""
+    ],
+    [
+      "ministry-full-form.js",
+      true,
+      ""
+    ]
+  ],
+  "crop_question_count": 30,
+  "livestock_question_count": 30,
+  "crop_missing_ids": [],
+  "livestock_missing_ids": [],
+  "crop_livestock_overlap": [],
+  "livestock_crop_overlap": [],
+  "collector_final_fixes_iife_count": 1,
+  "survey_type_dataset_present": true,
+  "save_safe_reads_present": true,
+  "geofence_code_present": true,
+  "cache_version_in_welcome": true
+}
