@@ -4,10 +4,10 @@
 
   function getApiUrl(){
     if(window.CROP_COLLECTOR_API_BASE) return window.CROP_COLLECTOR_API_BASE;
-    const host=(window.location.hostname && window.location.hostname!=='localhost' && window.location.hostname!=='127.0.0.1')
-      ? window.location.hostname
-      : '127.0.0.1';
-    return `http://${host}:8000/api/v1`;
+    const host = window.location.hostname || '127.0.0.1';
+    const isLocal = host === 'localhost' || host === '127.0.0.1' || /^10\./.test(host) || /^192\.168\./.test(host) || /^172\.(1[6-9]|2\d|3[0-1])\./.test(host);
+    if(!isLocal) return 'https://crop-collector-backend.onrender.com/api/v1';
+    return `http://${host === 'localhost' ? '127.0.0.1' : host}:8000/api/v1`;
   }
 
   function safeBase64Json(part){

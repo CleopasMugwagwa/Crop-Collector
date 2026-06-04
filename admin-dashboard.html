@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
   <meta charset="UTF-8" />
@@ -2237,10 +2237,9 @@ body.admin-compact-records #records-table {
   <script src="vendor/leaflet/leaflet.js"></script>
   <script src="frontend-config.js?v=deploy-config"></script>
   <script>
-    const API_HOST = window.location.hostname && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1"
-      ? window.location.hostname
-      : "127.0.0.1";
-    const API_URL = window.CROP_COLLECTOR_API_BASE || `http://${API_HOST}:8000/api/v1`;
+    const API_HOST = window.location.hostname || '127.0.0.1';
+    const isLocalApiHost = API_HOST === 'localhost' || API_HOST === '127.0.0.1' || /^10\./.test(API_HOST) || /^192\.168\./.test(API_HOST) || /^172\.(1[6-9]|2\d|3[0-1])\./.test(API_HOST);
+    const API_URL = window.CROP_COLLECTOR_API_BASE || (isLocalApiHost ? `http://${API_HOST === 'localhost' ? '127.0.0.1' : API_HOST}:8000/api/v1` : 'https://crop-collector-backend.onrender.com/api/v1');
     const ADMIN_APP_VERSION = "v1072-admin-polygon-shapefile-export";
     const PAGE_SIZE = 20;
     const ADMIN_PANEL_STATE_KEY = "admin_dashboard_panels";

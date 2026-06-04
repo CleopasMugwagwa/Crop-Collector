@@ -4,8 +4,8 @@
 
   const DB_NAME = "crop_collector_offline_db";
   const DB_VERSION = 1;
-  const API_HOST = location.hostname && location.hostname !== "localhost" ? location.hostname : "127.0.0.1";
-  const API_BASE = window.CROP_COLLECTOR_API_BASE || ("http://" + API_HOST + ":8000/api/v1");
+  const API_HOST = location.hostname || '127.0.0.1';
+  const API_BASE = window.CROP_COLLECTOR_API_BASE || ((API_HOST === 'localhost' || API_HOST === '127.0.0.1' || /^10\./.test(API_HOST) || /^192\.168\./.test(API_HOST) || /^172\.(1[6-9]|2\d|3[0-1])\./.test(API_HOST)) ? ('http://' + (API_HOST === 'localhost' ? '127.0.0.1' : API_HOST) + ':8000/api/v1') : 'https://crop-collector-backend.onrender.com/api/v1');
 
   let dbPromise = null;
 
@@ -271,7 +271,7 @@
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 3000);
     try{
-      const response = await fetch("http://" + API_HOST + ":8000/docs", {signal:controller.signal});
+      const response = await fetch(API_BASE.replace(/\/api\/v1\/?$/, "") + "/docs", {signal:controller.signal});
       clearTimeout(timer);
       return response.ok;
     }catch(error){

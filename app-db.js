@@ -1,5 +1,12 @@
-﻿const API_HOST=window.location.hostname&&window.location.hostname!=='localhost'&&window.location.hostname!=='127.0.0.1'?window.location.hostname:'127.0.0.1';
-const API_URL=window.CROP_COLLECTOR_API_BASE||`http://${API_HOST}:8000/api/v1`;
+function getHostedApiBase(){
+  if(window.CROP_COLLECTOR_API_BASE) return window.CROP_COLLECTOR_API_BASE;
+  const host = window.location.hostname || '127.0.0.1';
+  const isLocal = host === 'localhost' || host === '127.0.0.1' || /^10\./.test(host) || /^192\.168\./.test(host) || /^172\.(1[6-9]|2\d|3[0-1])\./.test(host);
+  if(!isLocal) return 'https://crop-collector-backend.onrender.com/api/v1';
+  return `http://${host === 'localhost' ? '127.0.0.1' : host}:8000/api/v1`;
+}
+const API_HOST=window.location.hostname||'127.0.0.1';
+const API_URL=getHostedApiBase();
 const ACCESS_TOKEN_KEY='access_token';
 const LOCAL_QUEUE_KEY='local_field_entries_queue';
 const SYNC_HISTORY_KEY='sync_event_history';
