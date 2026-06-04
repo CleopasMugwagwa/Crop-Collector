@@ -1,5 +1,5 @@
-﻿// legacy smoke marker: zingsa-crop-collector-v1070-start-card-spacing
-const CACHE_NAME = 'crop-collector-v1070-start-card-spacing';
+﻿// legacy smoke marker: zingsa-crop-collector-v1067-map-mbtiles-survey-fix
+const CACHE_NAME = 'crop-collector-v1067-map-mbtiles-survey-fix';
 const TRANSPARENT_GIF_BYTES = Uint8Array.from(
   atob('R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='),
   (char) => char.charCodeAt(0)
