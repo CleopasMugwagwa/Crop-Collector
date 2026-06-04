@@ -1,11 +1,11 @@
-﻿
+
 (function(){
   "use strict";
 
   const DB_NAME = "crop_collector_offline_db";
   const DB_VERSION = 1;
   const API_HOST = location.hostname && location.hostname !== "localhost" ? location.hostname : "127.0.0.1";
-  const API_BASE = "http://" + API_HOST + ":8000/api/v1";
+  const API_BASE = window.CROP_COLLECTOR_API_BASE || ("http://" + API_HOST + ":8000/api/v1");
 
   let dbPromise = null;
 

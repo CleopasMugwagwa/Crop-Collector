@@ -3,6 +3,7 @@
   const ACCESS_TOKEN_KEY='access_token';
 
   function getApiUrl(){
+    if(window.CROP_COLLECTOR_API_BASE) return window.CROP_COLLECTOR_API_BASE;
     const host=(window.location.hostname && window.location.hostname!=='localhost' && window.location.hostname!=='127.0.0.1')
       ? window.location.hostname
       : '127.0.0.1';
