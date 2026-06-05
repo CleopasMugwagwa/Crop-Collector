@@ -14,8 +14,13 @@
     if(!section) return;
     section.dataset.collapsed = collapsed ? "true" : "false";
     section.classList.toggle("collector-support-collapsed", !!collapsed);
+    section.classList.toggle("collector-support-open", !collapsed);
     const heading = section.querySelector("h2");
-    if(heading) heading.setAttribute("aria-expanded", String(!collapsed));
+    if(heading){
+      heading.setAttribute("aria-expanded", String(!collapsed));
+      heading.setAttribute("role", "button");
+      heading.setAttribute("tabindex", "0");
+    }
     Array.from(section.children).forEach(child => {
       if(child.tagName === "H2") return;
       child.hidden = !!collapsed;
@@ -29,21 +34,25 @@
   }
 
   function collapseSupportSections(){
-    const isMobile = window.innerWidth < 900;
     document.querySelectorAll("#sidebar .section").forEach(section => {
       const title = sectionTitle(section);
       if(!SUPPORT_SECTION_NAMES.some(name => title.includes(name))) return;
       if(!section.dataset.cleanDisplayBound){
         section.dataset.cleanDisplayBound = "true";
-        section.querySelector("h2")?.addEventListener("click", event => {
+        const heading = section.querySelector("h2");
+        const toggle = event => {
           event.preventDefault();
           event.stopPropagation();
           const nextCollapsed = section.dataset.collapsed !== "true";
           section.dataset.userOpenedCleanDisplay = nextCollapsed ? "" : "true";
           setSectionCollapsed(section, nextCollapsed);
+        };
+        heading?.addEventListener("click", toggle);
+        heading?.addEventListener("keydown", event => {
+          if(event.key === "Enter" || event.key === " ") toggle(event);
         });
       }
-      if(isMobile && !section.dataset.cleanDisplayInitialized){
+      if(!section.dataset.cleanDisplayInitialized){
         section.dataset.cleanDisplayInitialized = "true";
         setSectionCollapsed(section, true);
       }
