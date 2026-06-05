@@ -13,6 +13,9 @@
   function setSectionCollapsed(section, collapsed){
     if(!section) return;
     const title = sectionTitle(section);
+    if(typeof window.setSidebarSectionCollapsed === "function"){
+      window.setSidebarSectionCollapsed(section, !!collapsed);
+    }
     section.dataset.collapsed = collapsed ? "true" : "false";
     section.classList.toggle("collector-support-collapsed", !!collapsed);
     section.classList.toggle("collector-support-open", !collapsed);
@@ -23,11 +26,13 @@
       heading.setAttribute("role", "button");
       heading.setAttribute("tabindex", "0");
     }
-    Array.from(section.children).forEach(child => {
-      if(child.tagName === "H2") return;
-      child.hidden = !!collapsed;
-      child.style.display = collapsed ? "none" : "";
-    });
+    if(typeof window.setSidebarSectionCollapsed !== "function"){
+      Array.from(section.children).forEach(child => {
+        if(child.tagName === "H2") return;
+        child.hidden = !!collapsed;
+        child.style.display = collapsed ? "none" : "";
+      });
+    }
   }
   function findSupportSection(name){
     return Array.from(document.querySelectorAll("#sidebar .section"))
@@ -35,12 +40,13 @@
   }
 
   function collapseSupportSections(){
+    window.initSidebarSections?.();
     document.querySelectorAll("#sidebar .section").forEach(section => {
       const title = sectionTitle(section);
       if(!SUPPORT_SECTION_NAMES.some(name => title.includes(name))) return;
-      if(!section.dataset.cleanDisplayBound){
+      const heading = section.querySelector("h2");
+      if(!heading?.dataset.menuReady && !section.dataset.cleanDisplayBound){
         section.dataset.cleanDisplayBound = "true";
-        const heading = section.querySelector("h2");
         const toggle = event => {
           event.preventDefault();
           event.stopPropagation();
@@ -55,8 +61,15 @@
       }
       if(!section.dataset.cleanDisplayInitialized){
         section.dataset.cleanDisplayInitialized = "true";
-        setSectionCollapsed(section, true);
+        if(section.dataset.collapsed === undefined){
+          setSectionCollapsed(section, true);
+        }
       }
+      const collapsed = section.dataset.collapsed === "true";
+      section.classList.toggle("collector-support-collapsed", collapsed);
+      section.classList.toggle("collector-support-open", !collapsed);
+      section.classList.toggle("offline-open", title.includes("Offline & Basemaps") && !collapsed);
+      if(heading) heading.setAttribute("aria-expanded", String(!collapsed));
     });
   }
 
