@@ -1,5 +1,5 @@
-﻿// legacy smoke marker: zingsa-crop-collector-v1074-mbtiles-upload-panel
-const CACHE_NAME = 'crop-collector-v1074-mbtiles-upload-panel';
+﻿// legacy smoke marker: zingsa-crop-collector-v1075-offline-toggle-auth-polish
+const CACHE_NAME = 'crop-collector-v1075-offline-toggle-auth-polish';
 const TRANSPARENT_GIF_BYTES = Uint8Array.from(
   atob('R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='),
   (char) => char.charCodeAt(0)

@@ -2072,3 +2072,25 @@ body.dark-theme .mobile-draw-launcher{
 .offline-map-upload-panel span{color:#4f6254;font-size:.84rem;line-height:1.35}
 .offline-map-upload-panel input[type="file"]{display:block!important;position:static!important;width:100%!important;height:auto!important;opacity:1!important;pointer-events:auto!important;font-size:.9rem!important}
 .offline-map-upload-panel button{width:100%!important;min-height:44px!important}
+/* v1075 support-section force open: keep tools hidden only while collapsed */
+#sidebar .section.collector-support-open,
+#sidebar .section.final-hide-in-collector.collector-support-open,
+#sidebar .section.final-hidden-section.collector-support-open{
+  display:block!important;
+}
+#sidebar .section.collector-support-open > *:not(h2),
+#sidebar .section.final-offline-map-section.collector-support-open > *:not(h2),
+#sidebar .section.final-offline-map-section.offline-open > *:not(h2){
+  display:block!important;
+  visibility:visible!important;
+}
+#sidebar .section.collector-support-open .ops-panel,
+#sidebar .section.collector-support-open .status,
+#sidebar .section.collector-support-open .button-group,
+#sidebar .section.collector-support-open .status-grid,
+#sidebar .section.collector-support-open .offline-map-upload-panel{
+  display:grid!important;
+}
+#sidebar .section.collector-support-collapsed > *:not(h2){
+  display:none!important;
+}

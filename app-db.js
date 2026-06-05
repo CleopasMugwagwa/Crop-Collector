@@ -12,7 +12,7 @@ const LOCAL_QUEUE_KEY='local_field_entries_queue';
 const SYNC_HISTORY_KEY='sync_event_history';
 const LEGACY_GUEST_KEY='guest_field_entries';
 const LAST_SURVEY_NAME_KEY='last_survey_name';const SURVEY_CACHE_KEY='survey_catalog_cache';const LOOKUP_CACHE_KEY='lookup_catalog_cache';const APP_STATE_VERSION_KEY='crop_collector_app_version';const DEVICE_ID_KEY='crop_collector_device_id';const PORTRAIT_LOCK_KEY='crop_collector_portrait_lock';const QUESTIONNAIRE_SECTION_STATE_KEY='collector_questionnaire_sections';// legacy smoke marker: APP_VERSION='2.9.18-map-mbtiles-survey-cache'
-const APP_VERSION='2.9.72-compact-settings-cleanup';
+const APP_VERSION='2.9.75-offline-toggle-auth-polish';
 const SQLJS_CANDIDATES=[{script:'vendor/sqljs/sql-wasm.js',wasmBase:'vendor/sqljs/'}];
 const SIDEBAR_SECTION_STATE_KEY='collector_sidebar_sections';
 let serverInfo=null;

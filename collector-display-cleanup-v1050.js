@@ -12,9 +12,11 @@
 
   function setSectionCollapsed(section, collapsed){
     if(!section) return;
+    const title = sectionTitle(section);
     section.dataset.collapsed = collapsed ? "true" : "false";
     section.classList.toggle("collector-support-collapsed", !!collapsed);
     section.classList.toggle("collector-support-open", !collapsed);
+    section.classList.toggle("offline-open", title.includes("Offline & Basemaps") && !collapsed);
     const heading = section.querySelector("h2");
     if(heading){
       heading.setAttribute("aria-expanded", String(!collapsed));
@@ -27,7 +29,6 @@
       child.style.display = collapsed ? "none" : "";
     });
   }
-
   function findSupportSection(name){
     return Array.from(document.querySelectorAll("#sidebar .section"))
       .find(section => sectionTitle(section).includes(name));
@@ -100,10 +101,9 @@
         }
       });
     }
-    if(offlineSection.dataset.collapsed !== "true"){
-      upload.hidden = false;
-      upload.style.display = "grid";
-    }
+    const isOpen = offlineSection.dataset.collapsed !== "true" || offlineSection.classList.contains("offline-open") || offlineSection.classList.contains("collector-support-open");
+    upload.hidden = !isOpen;
+    upload.style.display = isOpen ? "grid" : "none";
   }
   function compactOfflineSync(){
     const panel = document.getElementById("offline-sync-panel");
