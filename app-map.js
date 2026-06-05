@@ -1,7 +1,7 @@
 ﻿// Suppress Google Maps tile 503 errors in console
 window.addEventListener('error',e=>{const msg=String(e?.message||'');const url=e?.filename||'';if((msg.includes('503')||msg.includes('Offline'))&&(url.includes('mt')||url.includes('google'))){e.preventDefault();return true}},true);
 // Intercept failed tile loads
-const originalFetch=window.fetch;window.fetch=function(...args){const url=String(args[0]||'');if(url.includes('mt1.google.com')||url.includes('mt2.google.com')||url.includes('mt3.google.com')){return originalFetch.apply(this,args).catch(e=>{console.debug('[Map] Google tile load failed (expected in offline mode)',url);return new Response(new Blob(['GIF89a'],{type:'image/gif'}),{status:200,statusText:'OK'})})}}; 
+const originalFetch=window.fetch;window.fetch=function(...args){const url=String(args[0]?.url||args[0]||'');if(url.includes('mt1.google.com')||url.includes('mt2.google.com')||url.includes('mt3.google.com')){return originalFetch.apply(this,args).catch(e=>{console.debug('[Map] Google tile load failed (expected in offline mode)',url);return new Response(new Blob(['GIF89a'],{type:'image/gif'}),{status:200,statusText:'OK'})})}return originalFetch.apply(this,args)}; 
 
 function useTouchComfortMode(){return isMobileCollector()||window.matchMedia('(pointer: coarse)').matches}
 function isPointLayer(layer){return layer instanceof L.Marker||layer instanceof L.CircleMarker||layer?.feature?.geometry?.type==='Point'}
