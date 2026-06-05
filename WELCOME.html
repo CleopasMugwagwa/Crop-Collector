@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="vendor/leaflet/leaflet.css?v=1051" />
 <link rel="stylesheet" href="vendor/leaflet-draw/leaflet.draw.css?v=1051" />
 <script src="vendor/feather/feather.min.js?v=1051"></script>
-<link rel="stylesheet" href="collector.css?v=1068-map-draw-mbtiles-fix">
+<link rel="stylesheet" href="collector.css?v=1069-login-map-fix">
 <link rel="stylesheet" href="collector-final-fixes.css?v=1070-start-card-spacing">
 <script src="frontend-config.js?v=deploy-config"></script>
 <link rel="stylesheet" href="offline-sync-workflow.css?v=1051">
@@ -432,9 +432,9 @@ body.auth-route-login #app{display:none!important}
 })();
 </script>
 
-    <script src="app-db.js?v=1068-map-draw-mbtiles-fix"></script>
-<script src="app-wizard.js?v=1068-map-draw-mbtiles-fix"></script>
-<script src="app-map.js?v=1068-map-draw-mbtiles-fix"></script>
+    <script src="app-db.js?v=1069-login-map-fix"></script>
+<script src="app-wizard.js?v=1069-login-map-fix"></script>
+<script src="app-map.js?v=1069-login-map-fix"></script>
 <script src="app-sync.js?v=1054-new-record-reset"></script>
 <script src="app-sync-hotfix.js?v=1051"></script>
 
@@ -593,7 +593,7 @@ const CORE_REGISTRATION_FLOW=['survey-name','questionnaire-id','owner-name','far
       if(!data || !data.access_token) throw lastError || new Error('Login failed.');
       localStorage.setItem(ACCESS_TOKEN_KEY, data.access_token);
       setAuthFeedback('Login successful. Opening collector...', 'success');
-      window.location.replace('WELCOME.html?screen=collector&v=1051');
+      window.location.replace('WELCOME.html?screen=collector&v=1069');
       return true;
     }catch(error){
       console.error('Robust login failed:', error);
