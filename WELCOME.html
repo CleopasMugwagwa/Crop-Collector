@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="vendor/leaflet/leaflet.css?v=1051" />
 <link rel="stylesheet" href="vendor/leaflet-draw/leaflet.draw.css?v=1051" />
 <script src="vendor/feather/feather.min.js?v=1051"></script>
-<link rel="stylesheet" href="collector.css?v=1075-offline-toggle-auth-polish">
+<link rel="stylesheet" href="collector.css?v=1076-mbtiles-safe-submenus">
 <link rel="stylesheet" href="collector-final-fixes.css?v=1070-start-card-spacing">
 <script src="frontend-config.js?v=deploy-config"></script>
 <link rel="stylesheet" href="offline-sync-workflow.css?v=1051">
@@ -416,7 +416,7 @@ body.auth-route-login #app{display:none!important}
 <script src="vendor/leaflet/leaflet.js?v=1051"></script>
 <script src="vendor/leaflet-draw/leaflet.draw.js?v=1051"></script>
 <script src="vendor/leaflet-geometryutil/leaflet.geometryutil.js?v=1051"></script>
-<script src="vendor/sqljs/sql-wasm.js?v=1075-offline-toggle-auth-polish"></script>
+<script src="vendor/sqljs/sql-wasm.js?v=1076-mbtiles-safe-submenus"></script>
 
 
 <script id="early-safe-v1000">
@@ -432,9 +432,9 @@ body.auth-route-login #app{display:none!important}
 })();
 </script>
 
-    <script src="app-db.js?v=1075-offline-toggle-auth-polish"></script>
-<script src="app-wizard.js?v=1075-offline-toggle-auth-polish"></script>
-<script src="app-map.js?v=1075-offline-toggle-auth-polish"></script>
+    <script src="app-db.js?v=1076-mbtiles-safe-submenus"></script>
+<script src="app-wizard.js?v=1076-mbtiles-safe-submenus"></script>
+<script src="app-map.js?v=1076-mbtiles-safe-submenus"></script>
 <script src="app-sync.js?v=1054-new-record-reset"></script>
 <script src="app-sync-hotfix.js?v=1051"></script>
 
@@ -490,7 +490,7 @@ body.auth-route-login #app{display:none!important}
         if(!token){
           console.warn('[Route] Collector requested without access_token. Returning to login.');
           window.__collectorRouteStarted=false;
-          window.location.replace('WELCOME.html?screen=login&v=1075');
+          window.location.replace('WELCOME.html?screen=login&v=1076');
           return;
         }
         const user = typeof window.__collectorGetSafeUser==='function'
@@ -603,7 +603,7 @@ const CORE_REGISTRATION_FLOW=['survey-name','questionnaire-id','owner-name','far
       if(!data || !data.access_token) throw lastError || new Error('Login failed.');
       localStorage.setItem(ACCESS_TOKEN_KEY, data.access_token);
       setAuthFeedback('Login successful. Opening collector...', 'success');
-      window.location.replace('WELCOME.html?screen=collector&v=1075');
+      window.location.replace('WELCOME.html?screen=collector&v=1076');
       return true;
     }catch(error){
       console.error('Robust login failed:', error);
@@ -624,6 +624,6 @@ const CORE_REGISTRATION_FLOW=['survey-name','questionnaire-id','owner-name','far
     <script src="draft-queue-polish-v1050.js?v=1051-clean-display-fast"></script>
     <script src="collector-photo-evidence-v1060.js?v=1060-field-finish"></script>
     <script src="collector-mobile-field-test-v1062.js?v=1062-mobile-crop-map-guidance"></script>
-    <script src="collector-display-cleanup-v1050.js?v=1075-offline-toggle-auth-polish"></script>
+    <script src="collector-display-cleanup-v1050.js?v=1076-mbtiles-safe-submenus"></script>
 </body>
 </html>
