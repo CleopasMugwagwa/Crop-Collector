@@ -67,6 +67,44 @@
     }
   }
 
+
+  function ensureOfflineMapUpload(){
+    const offlineSection = findSupportSection("Offline & Basemaps");
+    if(!offlineSection) return;
+    let upload = document.getElementById("offline-map-upload-panel");
+    if(!upload){
+      upload = document.createElement("div");
+      upload.id = "offline-map-upload-panel";
+      upload.className = "status offline-map-upload-panel";
+      upload.innerHTML = '<strong>Offline Map Upload</strong><span>Choose the MBTiles file prepared in QGIS.</span><button type="button" id="offline-map-upload-btn" class="secondary"><i data-feather="upload"></i> Upload MBTiles</button><input type="file" id="offline-map-upload-file" accept=".mbtiles,.sqlite,.db,application/octet-stream">';
+      const status = document.getElementById("offline-status");
+      offlineSection.insertBefore(upload, status || offlineSection.children[1] || null);
+    }
+    const fileInput = upload.querySelector("#offline-map-upload-file");
+    const button = upload.querySelector("#offline-map-upload-btn");
+    if(fileInput && fileInput.dataset.bound !== "true"){
+      fileInput.dataset.bound = "true";
+      fileInput.addEventListener("change", event => {
+        if(window.__collectorHandleMbtilesDirect) window.__collectorHandleMbtilesDirect(event.target);
+      });
+    }
+    if(button && button.dataset.bound !== "true"){
+      button.dataset.bound = "true";
+      button.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+        if(window.__collectorOpenMbtilesPicker){
+          window.__collectorOpenMbtilesPicker();
+        }else{
+          fileInput?.click();
+        }
+      });
+    }
+    if(offlineSection.dataset.collapsed !== "true"){
+      upload.hidden = false;
+      upload.style.display = "grid";
+    }
+  }
   function compactOfflineSync(){
     const panel = document.getElementById("offline-sync-panel");
     if(panel){
@@ -182,7 +220,9 @@
     updateCropBoundaryGate();
     hideSecondPlotHelper();
     compactOfflineSync();
+    ensureOfflineMapUpload();
     collapseSupportSections();
+    ensureOfflineMapUpload();
     document.body.dataset.cleanDisplayApplying = "false";
   }
 

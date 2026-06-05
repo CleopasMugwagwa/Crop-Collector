@@ -2057,3 +2057,18 @@ body.dark-theme .mobile-draw-launcher{
 #crop-form {
   gap: .55rem !important;
 }
+
+/* v1074: keep MBTiles upload obvious inside the collapsed Offline tools */
+.offline-map-upload-panel{
+  display:grid;
+  gap:.65rem;
+  margin:.75rem .9rem!important;
+  padding:.85rem!important;
+  border:1px dashed #9fc9a4!important;
+  border-radius:14px!important;
+  background:#f8fcf8!important;
+}
+.offline-map-upload-panel strong{color:#14532d;font-size:.95rem}
+.offline-map-upload-panel span{color:#4f6254;font-size:.84rem;line-height:1.35}
+.offline-map-upload-panel input[type="file"]{display:block!important;position:static!important;width:100%!important;height:auto!important;opacity:1!important;pointer-events:auto!important;font-size:.9rem!important}
+.offline-map-upload-panel button{width:100%!important;min-height:44px!important}
