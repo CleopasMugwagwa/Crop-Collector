@@ -1,4 +1,4 @@
-(function(){
+﻿(function(){
   "use strict";
 
   function isMobile(){
@@ -35,6 +35,19 @@
     const bannerMessage = document.getElementById("map-workflow-message");
     if(bannerTitle) bannerTitle.textContent = "Draw crop boundary";
     if(bannerMessage) bannerMessage.textContent = "Tap GPS first. If the map background is blank, switch basemap to OpenStreetMap or load MBTiles.";
+  }
+
+  function configurePointTool(){
+    const button = document.getElementById("mobile-draw-point-btn");
+    if(!button || button.dataset.pointTool === "true") return;
+    button.dataset.pointTool = "true";
+    button.setAttribute("aria-label", "Add point");
+    button.setAttribute("title", "Add a reference point");
+    const icon = button.querySelector("i");
+    const label = button.querySelector("span");
+    if(icon) icon.setAttribute("data-feather", "map-pin");
+    if(label) label.textContent = "Point";
+    window.feather?.replace?.();
   }
 
   function ensureDrawPrompt(){
@@ -74,9 +87,17 @@
         }, 350);
       }
 
-      if(event.target.closest("#mobile-draw-polygon-btn,#mobile-draw-rectangle-btn,.leaflet-draw-draw-polygon,.leaflet-draw-draw-rectangle")){
+      if(event.target.closest("#mobile-draw-polygon-btn,.leaflet-draw-draw-polygon")){
         openMapWorkspace();
         showMapGuidance();
+      }
+
+      if(event.target.closest("#mobile-draw-point-btn,.leaflet-draw-draw-marker")){
+        openMapWorkspace();
+        const bannerTitle = document.getElementById("map-workflow-title");
+        const bannerMessage = document.getElementById("map-workflow-message");
+        if(bannerTitle) bannerTitle.textContent = "Add reference point";
+        if(bannerMessage) bannerMessage.textContent = "Tap the correct crop reference or livestock location on the map.";
       }
 
       if(event.target.closest("#select-polygon-btn")){
@@ -99,6 +120,7 @@
   }
 
   function tick(){
+    configurePointTool();
     ensureDrawPrompt();
     hideSecondPlotWhenNoPolygon();
     preferOpenStreetMapOnMobile();
